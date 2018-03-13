@@ -2,7 +2,7 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Request\Aggregations;
 
-use CodeSolo\Elasticsearch\Api\Search\Response\Aggregations;
+use CodeSolo\Elasticsearch\Api\Search\Request\Aggregations;
 
 abstract class AbstractItem
 {
@@ -12,6 +12,11 @@ abstract class AbstractItem
     protected $aggregations;
 
     /**
+     * @var string
+     */
+    private $name;
+
+    /**
      * @return string
      */
     abstract protected function getType(): string;
@@ -19,9 +24,29 @@ abstract class AbstractItem
     /**
      * @return array
      */
+    abstract protected function getBody(): array;
+
+    /**
+     * AbstractItem constructor.
+     * @param string $name
+     */
+    public function __construct(string $name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return array
+     */
     public function toDsl(): array
     {
-
+        $dsl = [
+            $this->getType() => $this->getBody(),
+        ];
+        if ($this->aggregations) {
+            $dsl['aggregations'] = $this->aggregations->toDsl();
+        }
+        return $dsl;
     }
 
     /**
@@ -29,7 +54,7 @@ abstract class AbstractItem
      */
     public function getName(): string
     {
-
+        return $this->name;
     }
 
     /**
@@ -38,6 +63,8 @@ abstract class AbstractItem
      */
     public function add(AbstractItem $item): AbstractItem
     {
+        $this->aggregations = $this->aggregations ?? new Aggregations();
+        $this->aggregations->add($item);
         return $this;
     }
 }

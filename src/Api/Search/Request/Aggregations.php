@@ -30,5 +30,6 @@ class Aggregations
     public function add(AbstractItem $item): Aggregations
     {
         $this->items[] = $item;
+        return $this;
     }
 }
