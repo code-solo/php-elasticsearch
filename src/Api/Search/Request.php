@@ -43,7 +43,7 @@ class Request
             $dsl['query'] = $this->query->toDsl();
         }
         if ($this->aggregations) {
-            $dsl['aggs'] = $this->aggregations->toDsl();
+            $dsl['aggregations'] = $this->aggregations->toDsl();
         }
         return $dsl;
     }
