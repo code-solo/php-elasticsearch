@@ -1,8 +1,8 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Api\Doc\Get;
+namespace CodeSolo\Elasticsearch\Api\Doc\Get;
 
-use MySpot\Elasticsearch\Driver\Exception\InvalidRawData;
+use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Response
 {

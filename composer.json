@@ -11,5 +11,10 @@
     "psr-4": {
       "CodeSolo\\Elasticsearch\\": "src"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "CodeSolo\\ElasticsearchTest\\": "tests"
+    }
   }
 }

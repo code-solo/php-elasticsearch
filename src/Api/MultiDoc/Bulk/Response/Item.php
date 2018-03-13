@@ -1,8 +1,8 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Api\MultiDoc\Bulk\Response;
+namespace CodeSolo\Elasticsearch\Api\MultiDoc\Bulk\Response;
 
-use MySpot\Elasticsearch\Driver\Exception\InvalidRawData;
+use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Item
 {
@@ -27,32 +27,32 @@ class Item
     private $id;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $version;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $result;
 
     /**
-     * @var Shards
+     * @var Shards|null
      */
     private $shards;
 
     /**
-     * @var Error
+     * @var Error|null
      */
     private $error;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $seqNo;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $primaryTerm;
 
@@ -146,7 +146,7 @@ class Item
     /**
      * @return Shards|null
      */
-    public function getShards(): ?Shards
+    public function getShards()
     {
         return $this->shards;
     }
@@ -154,7 +154,7 @@ class Item
     /**
      * @return Error|null
      */
-    public function getError(): ?Error
+    public function getError()
     {
         return $this->error;
     }
@@ -162,7 +162,7 @@ class Item
     /**
      * @return int|null
      */
-    public function getVersion(): ?int
+    public function getVersion()
     {
         return $this->version;
     }
@@ -170,7 +170,7 @@ class Item
     /**
      * @return int|null
      */
-    public function getResult(): ?int
+    public function getResult()
     {
         return $this->result;
     }
@@ -178,7 +178,7 @@ class Item
     /**
      * @return int|null
      */
-    public function getSeqNo(): ?int
+    public function getSeqNo()
     {
         return $this->seqNo;
     }
@@ -186,7 +186,7 @@ class Item
     /**
      * @return int|null
      */
-    public function getPrimaryTerm(): ?int
+    public function getPrimaryTerm()
     {
         return $this->primaryTerm;
     }

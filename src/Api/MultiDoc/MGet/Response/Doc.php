@@ -1,8 +1,8 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Api\MultiDoc\MGet\Response;
+namespace CodeSolo\Elasticsearch\Api\MultiDoc\MGet\Response;
 
-use MySpot\Elasticsearch\Driver\Exception\InvalidRawData;
+use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Doc
 {

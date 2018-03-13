@@ -1,9 +1,9 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Api\Doc\Delete;
+namespace CodeSolo\Elasticsearch\Api\Doc\Delete;
 
-use MySpot\Elasticsearch\Driver\Api\Doc\Delete\Response\Shards;
-use MySpot\Elasticsearch\Driver\Exception\InvalidRawData;
+use CodeSolo\Elasticsearch\Api\Doc\Delete\Response\Shards;
+use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Response
 {
@@ -54,7 +54,6 @@ class Response
      */
     public static function fromRawData(array $data): Response
     {
-        print_r($data);
         if (!array_key_exists('_shards', $data) ||
             !array_key_exists('_index', $data) ||
             !array_key_exists('_type', $data) ||

@@ -1,18 +1,12 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Api\Search;
+namespace CodeSolo\Elasticsearch\Api\Search;
 
-use MySpot\Elasticsearch\Driver\Exception\InvalidRawData;
-use MySpot\Elasticsearch\Driver\Search\Response\Aggregations;
-use MySpot\Elasticsearch\Driver\Search\Response\Hits;
-use MySpot\Elasticsearch\Driver\Search\Response\Shards;
+use CodeSolo\Elasticsearch\Exception\InvalidRawData;
+use CodeSolo\Elasticsearch\Api\Search\Response\Aggregations;
+use CodeSolo\Elasticsearch\Api\Search\Response\Hits;
+use CodeSolo\Elasticsearch\Api\Search\Response\Shards;
 
-/**
- * Class Response
- * @package MySpot\Elasticsearch\Driver\Api\Search
- *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/_the_search_api.html
- */
 class Response
 {
     /**
@@ -36,7 +30,7 @@ class Response
     private $hits;
 
     /**
-     * @var Aggregations
+     * @var Aggregations|null
      */
     private $aggregations;
 
@@ -47,6 +41,7 @@ class Response
      */
     public static function fromRawData(array $data): Response
     {
+        print_r($data);
         if (!array_key_exists('took', $data) ||
             !array_key_exists('timed_out', $data) ||
             !array_key_exists('_shards', $data) ||
@@ -67,52 +62,48 @@ class Response
     }
 
     /**
-     * Time in milliseconds for Elasticsearch to execute the search.
-     *
+     * Response constructor.
+     */
+    private function __construct()
+    {
+    }
+
+    /**
      * @return int
      */
-    public function took(): int
+    public function getTook(): int
     {
         return $this->took;
     }
 
     /**
-     * Tells us if the search timed out or not.
-     *
      * @return bool
      */
-    public function timedOut(): bool
+    public function getTimedOut(): bool
     {
         return $this->timedOut;
     }
 
     /**
-     * Tells us how many shards were searched, as well as a count of the
-     * successful/failed searched shards.
-     *
      * @return Shards
      */
-    public function shards(): Shards
+    public function getShards(): Shards
     {
         return $this->shards;
     }
 
     /**
-     * Search results.
-     *
      * @return Hits
      */
-    public function hits(): Hits
+    public function getHits(): Hits
     {
         return $this->hits;
     }
 
     /**
-     * Aggregations results.
-     *
-     * @return Aggregations
+     * @return Aggregations|null
      */
-    public function aggregations(): ?Aggregations
+    public function getAggregations()
     {
         return $this->aggregations;
     }

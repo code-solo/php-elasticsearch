@@ -1,14 +1,15 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Api\MultiDoc;
+namespace CodeSolo\Elasticsearch\Api\MultiDoc;
 
-use MySpot\Elasticsearch\Driver\Api\MultiDoc\DeleteByQuery\Response;
-use MySpot\Elasticsearch\Driver\Connection\Connection;
+use CodeSolo\Elasticsearch\Api\MultiDoc\DeleteByQuery\Response;
+use CodeSolo\Elasticsearch\Connection\ConnectionInterface;
+use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class DeleteByQuery
 {
     /**
-     * @var Connection
+     * @var ConnectionInterface
      */
     private $connection;
 
@@ -29,15 +30,16 @@ class DeleteByQuery
 
     /**
      * Index constructor.
-     * @param Connection $connection
+     * @param ConnectionInterface $connection
      */
-    public function __construct(Connection $connection)
+    public function __construct(ConnectionInterface $connection)
     {
         $this->connection = $connection;
     }
 
     /**
      * @return Response
+     * @throws InvalidRawData
      */
     public function do(): Response
     {

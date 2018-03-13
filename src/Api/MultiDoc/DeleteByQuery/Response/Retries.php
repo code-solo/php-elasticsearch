@@ -1,8 +1,8 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Api\MultiDoc\DeleteByQuery\Response;
+namespace CodeSolo\Elasticsearch\Api\MultiDoc\DeleteByQuery\Response;
 
-use MySpot\Elasticsearch\Driver\Exception\InvalidRawData;
+use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Retries
 {

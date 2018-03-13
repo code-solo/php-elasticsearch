@@ -1,8 +1,8 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Api\MultiDoc\MGet;
+namespace CodeSolo\Elasticsearch\Api\MultiDoc\MGet;
 
-use MySpot\Elasticsearch\Driver\Api\MultiDoc\MGet\Body\Doc;
+use CodeSolo\Elasticsearch\Api\MultiDoc\MGet\Body\Doc;
 
 class Body
 {

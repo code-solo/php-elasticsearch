@@ -1,6 +1,6 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Api\Search\Response;
+namespace CodeSolo\Elasticsearch\Api\Search\Response;
 
 class Aggregations
 {

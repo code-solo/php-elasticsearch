@@ -1,6 +1,6 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Api;
+namespace CodeSolo\Elasticsearch\Api\MultiDoc\Bulk;
 
 interface ToBulkDslInterface
 {

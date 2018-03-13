@@ -1,13 +1,13 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Api\MultiDoc;
+namespace CodeSolo\Elasticsearch\Api\MultiDoc;
 
-use MySpot\Elasticsearch\Driver\Connection\Connection;
+use CodeSolo\Elasticsearch\Connection\ConnectionInterface;
 
 class Reindex
 {
     /**
-     * @var Connection
+     * @var ConnectionInterface
      */
     private $connection;
 
@@ -18,9 +18,9 @@ class Reindex
 
     /**
      * Bulk constructor.
-     * @param Connection $connection
+     * @param ConnectionInterface $connection
      */
-    public function __construct(Connection $connection)
+    public function __construct(ConnectionInterface $connection)
     {
         $this->connection = $connection;
     }

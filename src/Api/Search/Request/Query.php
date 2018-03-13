@@ -1,8 +1,8 @@
 <?php
 
-namespace CodeSolo\Elasticsearch\Api\MultiDoc\MGet\Body;
+namespace CodeSolo\Elasticsearch\Api\Search\Request;
 
-class Doc
+class Query
 {
     /**
      * @return array

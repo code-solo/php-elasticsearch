@@ -1,12 +1,12 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Connection;
+namespace CodeSolo\Elasticsearch\Connection;
 
 use Elasticsearch\ClientBuilder;
 use Elasticsearch\Client;
-use MySpot\Elasticsearch\Driver\Api\Search;
+use CodeSolo\Elasticsearch\Api\Search;
 
-class Connection
+class Connection implements ConnectionInterface
 {
     /**
      * @var Client
@@ -15,7 +15,12 @@ class Connection
 
     public function __construct()
     {
-        $this->client = ClientBuilder::create()->build();
+        $this->client = ClientBuilder
+            ::create()
+            ->setHosts([
+                'http://127.0.0.1:9200'
+            ])
+            ->build();
     }
 
     /**

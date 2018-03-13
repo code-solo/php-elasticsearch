@@ -1,9 +1,9 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Api\MultiDoc\Bulk;
+namespace CodeSolo\Elasticsearch\Api\MultiDoc\Bulk;
 
-use MySpot\Elasticsearch\Driver\Api\MultiDoc\Bulk\Response\Item;
-use MySpot\Elasticsearch\Driver\Exception\InvalidRawData;
+use CodeSolo\Elasticsearch\Api\MultiDoc\Bulk\Response\Item;
+use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Response
 {

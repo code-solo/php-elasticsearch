@@ -1,9 +1,9 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Api\Doc\Index;
+namespace CodeSolo\Elasticsearch\Api\Doc\Index;
 
-use MySpot\Elasticsearch\Driver\Api\Doc\Index\Response\Shards;
-use MySpot\Elasticsearch\Driver\Exception\InvalidRawData;
+use CodeSolo\Elasticsearch\Api\Doc\Index\Response\Shards;
+use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Response
 {

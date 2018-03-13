@@ -1,9 +1,9 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Api\MultiDoc\UpdateByQuery;
+namespace CodeSolo\Elasticsearch\Api\MultiDoc\UpdateByQuery;
 
-use MySpot\Elasticsearch\Driver\Api\MultiDoc\UpdateByQuery\Response\Retries;
-use MySpot\Elasticsearch\Driver\Exception\InvalidRawData;
+use CodeSolo\Elasticsearch\Api\MultiDoc\UpdateByQuery\Response\Retries;
+use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Response
 {

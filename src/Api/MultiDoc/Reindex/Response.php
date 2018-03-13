@@ -1,9 +1,9 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Api\MultiDoc\Reindex;
+namespace CodeSolo\Elasticsearch\Api\MultiDoc\Reindex;
 
-use MySpot\Elasticsearch\Driver\Api\MultiDoc\Reindex\Response\Retries;
-use MySpot\Elasticsearch\Driver\Exception\InvalidRawData;
+use CodeSolo\Elasticsearch\Api\MultiDoc\Reindex\Response\Retries;
+use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Response
 {

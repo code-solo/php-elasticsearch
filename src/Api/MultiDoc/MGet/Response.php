@@ -1,9 +1,9 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Api\MultiDoc\MGet;
+namespace CodeSolo\Elasticsearch\Api\MultiDoc\MGet;
 
-use MySpot\Elasticsearch\Driver\Api\MultiDoc\MGet\Response\Doc;
-use MySpot\Elasticsearch\Driver\Exception\InvalidRawData;
+use CodeSolo\Elasticsearch\Api\MultiDoc\MGet\Response\Doc;
+use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Response
 {

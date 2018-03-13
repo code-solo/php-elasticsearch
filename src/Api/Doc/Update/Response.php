@@ -1,9 +1,9 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Api\Doc\Update;
+namespace CodeSolo\Elasticsearch\Api\Doc\Update;
 
-use MySpot\Elasticsearch\Driver\Api\Doc\Update\Response\Shards;
-use MySpot\Elasticsearch\Driver\Exception\InvalidRawData;
+use CodeSolo\Elasticsearch\Api\Doc\Update\Response\Shards;
+use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Response
 {
@@ -33,12 +33,12 @@ class Response
     private $version;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $seqNo;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $primaryTerm;
 
@@ -54,14 +54,11 @@ class Response
      */
     public static function fromRawData(array $data): Response
     {
-        print_r($data);
         if (!array_key_exists('_shards', $data) ||
             !array_key_exists('_index', $data) ||
             !array_key_exists('_type', $data) ||
             !array_key_exists('_id', $data) ||
             !array_key_exists('_version', $data) ||
-            !array_key_exists('_seq_no', $data) ||
-            !array_key_exists('_primary_term', $data) ||
             !array_key_exists('result', $data)
         ) {
             throw new InvalidRawData();
@@ -72,8 +69,8 @@ class Response
         $instance->type = $data['_type'];
         $instance->id = $data['_id'];
         $instance->version = $data['_version'];
-        $instance->seqNo = $data['_seq_no'];
-        $instance->primaryTerm = $data['_primary_term'];
+        $instance->seqNo = $data['_seq_no'] ?? null;
+        $instance->primaryTerm = $data['_primary_term'] ?? null;
         $instance->result = $data['result'];
         return $instance;
     }
@@ -126,17 +123,17 @@ class Response
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getSeqNo(): int
+    public function getSeqNo()
     {
         return $this->seqNo;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPrimaryTerm(): int
+    public function getPrimaryTerm()
     {
         return $this->primaryTerm;
     }

@@ -1,14 +1,14 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Api\Search\Query;
+namespace CodeSolo\Elasticsearch\Api\Search\Request;
 
-class Body
+class Aggregations
 {
     /**
      * @return array
      */
     public function toDsl(): array
     {
-        return [];
+
     }
 }

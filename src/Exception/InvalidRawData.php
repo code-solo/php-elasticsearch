@@ -1,6 +1,6 @@
 <?php
 
-namespace MySpot\Elasticsearch\Driver\Exception;
+namespace CodeSolo\Elasticsearch\Exception;
 
 class InvalidRawData extends AbstractException
 {
