@@ -1,10 +1,10 @@
 <?php
 
-namespace CodeSolo\Elasticsearch\Api\Search\Request\Aggregations;
+namespace CodeSolo\Elasticsearch\Api\Search\Aggregations;
 
 use CodeSolo\Elasticsearch\Api\Search\Request\Aggregations;
 
-abstract class AbstractItem
+abstract class AbstractRequest
 {
     /**
      * @var Aggregations|null
@@ -58,10 +58,10 @@ abstract class AbstractItem
     }
 
     /**
-     * @param AbstractItem $item
+     * @param AbstractRequest $item
      * @return static
      */
-    public function add(AbstractItem $item): AbstractItem
+    public function add(AbstractRequest $item): AbstractRequest
     {
         $this->aggregations = $this->aggregations ?? new Aggregations();
         $this->aggregations->add($item);

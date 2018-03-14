@@ -2,12 +2,12 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Request;
 
-use CodeSolo\Elasticsearch\Api\Search\Request\Aggregations\AbstractItem;
+use CodeSolo\Elasticsearch\Api\Search\Aggregations\AbstractRequest;
 
 class Aggregations
 {
     /**
-     * @var AbstractItem[]
+     * @var AbstractRequest[]
      */
     private $items = [];
 
@@ -24,10 +24,10 @@ class Aggregations
     }
 
     /**
-     * @param AbstractItem $item
+     * @param AbstractRequest $item
      * @return static
      */
-    public function add(AbstractItem $item): Aggregations
+    public function add(AbstractRequest $item): Aggregations
     {
         $this->items[] = $item;
         return $this;
