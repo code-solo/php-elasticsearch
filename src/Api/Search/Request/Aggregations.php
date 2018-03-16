@@ -27,9 +27,17 @@ class Aggregations
      * @param AbstractRequest $item
      * @return static
      */
-    public function add(AbstractRequest $item): Aggregations
+    public function addItem(AbstractRequest $item): Aggregations
     {
         $this->items[] = $item;
         return $this;
+    }
+
+    /**
+     * @return AbstractRequest[]
+     */
+    public function getItems(): array
+    {
+        return $this->items;
     }
 }

@@ -2,15 +2,9 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Response;
 
+use CodeSolo\Elasticsearch\Api\Search\Aggregations\ResponseCollectionTrait;
+
 class Aggregations
 {
-    /**
-     * @param array $data
-     * @return Aggregations|static
-     */
-    public static function fromRawData(array $data): Aggregations
-    {
-        $instance = new static();
-        return $instance;
-    }
+    use ResponseCollectionTrait;
 }

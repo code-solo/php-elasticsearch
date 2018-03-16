@@ -25,7 +25,7 @@ class Request extends AbstractRequest
     /**
      * @inheritdoc
      */
-    protected function getType(): string
+    public function getType(): string
     {
         return Type::BUCKET_TERMS;
     }

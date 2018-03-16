@@ -55,15 +55,23 @@ class AggregationsTest extends TestCase
 
     public function test()
     {
+        $item1 = new Search\Aggregations\Bucket\Terms\Request('agg1', 'key1');
+        $item2 = new Search\Aggregations\Bucket\Terms\Request('agg2', 'key2');
+        $item1->addAggregationsItem($item2);
+
         $agg = new Search\Request\Aggregations();
-        $agg->add(
-            (new Search\Aggregations\Bucket\Terms\Request('agg1', 'key1'))
-                ->add(new Search\Aggregations\Bucket\Terms\Request('agg2', 'key2'))
-        );
+        $agg->addItem($item1);
         $this->api->setAggregations(
             $agg
         );
 
-        $this->api->do();
+        $resp = $this->api->do();
+        /** @var Search\Aggregations\Bucket\Terms\Response $resp1 */
+        $resp1 = $resp->getAggregations()->getItem($item1);
+        foreach ($resp1->getBuckets() as $bucket) {
+            $bucket->getItem($item2);
+        }
+
+        print_r($resp1);
     }
 }

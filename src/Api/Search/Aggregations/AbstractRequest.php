@@ -19,7 +19,7 @@ abstract class AbstractRequest
     /**
      * @return string
      */
-    abstract protected function getType(): string;
+    abstract public function getType(): string;
 
     /**
      * @return array
@@ -61,10 +61,10 @@ abstract class AbstractRequest
      * @param AbstractRequest $item
      * @return static
      */
-    public function add(AbstractRequest $item): AbstractRequest
+    public function addAggregationsItem(AbstractRequest $item): AbstractRequest
     {
         $this->aggregations = $this->aggregations ?? new Aggregations();
-        $this->aggregations->add($item);
+        $this->aggregations->addItem($item);
         return $this;
     }
 }

@@ -41,7 +41,6 @@ class Response
      */
     public static function fromRawData(array $data): Response
     {
-        print_r($data);
         if (!array_key_exists('took', $data) ||
             !array_key_exists('timed_out', $data) ||
             !array_key_exists('_shards', $data) ||
