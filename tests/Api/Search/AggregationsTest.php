@@ -69,9 +69,9 @@ class AggregationsTest extends TestCase
         /** @var Search\Aggregations\Bucket\Terms\Response $resp1 */
         $resp1 = $resp->getAggregations()->getItem($item1);
         foreach ($resp1->getBuckets() as $bucket) {
-            $bucket->getItem($item2);
+            $bucket->getAggregations()->getItem($item2);
         }
 
-        print_r($resp1);
+        print_r($resp);
     }
 }

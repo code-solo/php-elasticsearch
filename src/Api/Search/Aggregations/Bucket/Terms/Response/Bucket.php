@@ -2,14 +2,12 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Aggregations\Bucket\Terms\Response;
 
-use CodeSolo\Elasticsearch\Api\Search\Aggregations\ResponseCollectionTrait;
+use CodeSolo\Elasticsearch\Api\Search\Aggregations\HasAggregationsTrait;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Bucket
 {
-    use ResponseCollectionTrait {
-        fromRawData as fromRawDataTrait;
-    }
+    use HasAggregationsTrait;
 
     /**
      * @var int
@@ -26,14 +24,15 @@ class Bucket
      */
     public static function fromRawData(array $data): Bucket
     {
-        $instance = static::fromRawDataTrait($data);
         if (!array_key_exists('key', $data) ||
             !array_key_exists('doc_count', $data)
         ) {
             throw new InvalidRawData();
         }
+        $instance = new static();
         $instance->key = $data['key'];
         $instance->docCount = $data['doc_count'];
+        $instance->setAggregations($data);
         return $instance;
     }
 }

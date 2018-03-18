@@ -2,13 +2,15 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search;
 
+use CodeSolo\Elasticsearch\Api\Search\Aggregations\HasAggregationsTrait;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
-use CodeSolo\Elasticsearch\Api\Search\Response\Aggregations;
 use CodeSolo\Elasticsearch\Api\Search\Response\Hits;
 use CodeSolo\Elasticsearch\Api\Search\Response\Shards;
 
 class Response
 {
+    use HasAggregationsTrait;
+
     /**
      * @var int
      */
@@ -28,11 +30,6 @@ class Response
      * @var Hits
      */
     private $hits;
-
-    /**
-     * @var Aggregations|null
-     */
-    private $aggregations;
 
     /**
      * @param array $data
@@ -55,7 +52,7 @@ class Response
         $instance->hits = Hits::fromRawData($data['hits']);
 
         if (array_key_exists('aggregations', $data)) {
-            $instance->aggregations = Aggregations::fromRawData($data['aggregations']);
+            $instance->setAggregations($data['aggregations']);
         }
         return $instance;
     }
@@ -97,13 +94,5 @@ class Response
     public function getHits(): Hits
     {
         return $this->hits;
-    }
-
-    /**
-     * @return Aggregations|null
-     */
-    public function getAggregations()
-    {
-        return $this->aggregations;
     }
 }
