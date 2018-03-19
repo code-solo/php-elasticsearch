@@ -2,15 +2,8 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Aggregations;
 
-use CodeSolo\Elasticsearch\Api\Search\Request\Aggregations;
-
 abstract class AbstractRequest
 {
-    /**
-     * @var Aggregations|null
-     */
-    protected $aggregations;
-
     /**
      * @var string
      */
@@ -40,13 +33,9 @@ abstract class AbstractRequest
      */
     public function toDsl(): array
     {
-        $dsl = [
+        return [
             $this->getType() => $this->getBody(),
         ];
-        if ($this->aggregations) {
-            $dsl['aggregations'] = $this->aggregations->toDsl();
-        }
-        return $dsl;
     }
 
     /**
@@ -55,16 +44,5 @@ abstract class AbstractRequest
     public function getName(): string
     {
         return $this->name;
-    }
-
-    /**
-     * @param AbstractRequest $item
-     * @return static
-     */
-    public function addAggregationsItem(AbstractRequest $item): AbstractRequest
-    {
-        $this->aggregations = $this->aggregations ?? new Aggregations();
-        $this->aggregations->addItem($item);
-        return $this;
     }
 }

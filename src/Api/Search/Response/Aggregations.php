@@ -49,6 +49,10 @@ class Aggregations
                     $item = Aggs\Bucket\Terms\Response::fromRawData($data);
                     break;
 
+                case Aggs\Type::METRICS_AVG:
+                    $item = Aggs\Metrics\Avg\Response::fromRawData($data);
+                    break;
+
                 default:
                     // TODO change it
                     throw new \Exception();

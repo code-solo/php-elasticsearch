@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeSolo\Elasticsearch\Api\Search\Aggregations\Metrics\Avg;
+namespace CodeSolo\Elasticsearch\Api\Search\Aggregations\Metrics\ExtendedStats;
 
 use CodeSolo\Elasticsearch\Api\Search\Aggregations\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\Search\Aggregations\Type;
@@ -18,11 +18,16 @@ class Request extends AbstractRequest
     private $missing;
 
     /**
+     * @var float
+     */
+    private $sigma;
+
+    /**
      * @inheritdoc
      */
     public function getType(): string
     {
-        return Type::METRICS_AVG;
+        return Type::METRICS_CARDINALITY;
     }
 
     /**
@@ -36,6 +41,9 @@ class Request extends AbstractRequest
         }
         if (!is_null($this->missing)) {
             $dsl['missing'] = $this->missing;
+        }
+        if (!is_null($this->sigma)) {
+            $dsl['sigma'] = $this->sigma;
         }
         return $dsl;
     }
@@ -57,6 +65,16 @@ class Request extends AbstractRequest
     public function setMissing(float $missing): Request
     {
         $this->missing = $missing;
+        return $this;
+    }
+
+    /**
+     * @param float $sigma
+     * @return Request|static
+     */
+    public function setSigma(float $sigma): Request
+    {
+        $this->sigma = $sigma;
         return $this;
     }
 }
