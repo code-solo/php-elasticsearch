@@ -37,7 +37,7 @@ class Request extends AbstractRequest
      */
     public function getType(): string
     {
-        return Type::METRICS_PERCENTILES;
+        return Type::METRICS_PERCENTILE_RANKS;
     }
 
     /**
