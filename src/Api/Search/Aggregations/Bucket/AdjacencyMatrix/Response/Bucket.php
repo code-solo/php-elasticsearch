@@ -1,14 +1,11 @@
 <?php
 
-namespace CodeSolo\Elasticsearch\Api\Search\Aggregations\Bucket\Terms\Response;
+namespace CodeSolo\Elasticsearch\Api\Search\Aggregations\Bucket\AdjacencyMatrix\Response;
 
-use CodeSolo\Elasticsearch\Api\Search\Aggregations\HasAggregationsTrait;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Bucket
 {
-    use HasAggregationsTrait;
-
     /**
      * @var int
      */
@@ -34,23 +31,6 @@ class Bucket
         $instance = new static();
         $instance->key = $data['key'];
         $instance->docCount = $data['doc_count'];
-        $instance->setAggregations($data);
         return $instance;
-    }
-
-    /**
-     * @return string
-     */
-    public function getKey(): string
-    {
-        return $this->key;
-    }
-
-    /**
-     * @return int
-     */
-    public function getDocCount(): int
-    {
-        return $this->docCount;
     }
 }
