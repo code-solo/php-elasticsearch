@@ -2,10 +2,10 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Request\Query;
 
-class Match
+class MatchPhrase
 {
     /**
-     * @var Match\Message|string
+     * @var MatchPhrase\Message|string
      */
     private $message;
 
@@ -23,10 +23,10 @@ class Match
     }
 
     /**
-     * @param Match\Message|string $message
-     * @return Match
+     * @param MatchPhrase\Message|string $message
+     * @return MatchPhrase
      */
-    public function setMessage($message): Match
+    public function setMessage($message): MatchPhrase
     {
         $this->message = $message;
         return $this;

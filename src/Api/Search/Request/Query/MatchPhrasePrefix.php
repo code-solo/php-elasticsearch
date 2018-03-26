@@ -2,10 +2,10 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Request\Query;
 
-class Match
+class MatchPhrasePrefix
 {
     /**
-     * @var Match\Message|string
+     * @var MatchPhrasePrefix\Message|string
      */
     private $message;
 
@@ -16,17 +16,17 @@ class Match
     {
         $dsl = [];
         if (!is_null($this->message)) {
-            $dsl['message'] = is_string($this->message)
-                ? $this->message : $this->message->toDsl();
+            $dsl['message'] = is_object($this->message)
+                ? $this->message->toDsl() : $this->message;
         }
         return $dsl;
     }
 
     /**
-     * @param Match\Message|string $message
-     * @return Match
+     * @param MatchPhrasePrefix\Message|string $message
+     * @return MatchPhrasePrefix
      */
-    public function setMessage($message): Match
+    public function setMessage($message): MatchPhrasePrefix
     {
         $this->message = $message;
         return $this;
