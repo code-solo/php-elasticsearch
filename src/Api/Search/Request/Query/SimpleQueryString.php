@@ -2,7 +2,9 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Request\Query;
 
-class SimpleQueryString
+use CodeSolo\Elasticsearch\Api\QueryType;
+
+class SimpleQueryString extends AbstractClause
 {
     /**
      * @var string
@@ -70,9 +72,17 @@ class SimpleQueryString
     private $fields;
 
     /**
-     * @return array
+     * @inheritdoc
      */
-    public function toDsl(): array
+    protected function getType(): string
+    {
+        return QueryType::SIMPLE_QUERY_STRING;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function getBody(): array
     {
         $dsl = [];
         if (!is_null($this->query)) {

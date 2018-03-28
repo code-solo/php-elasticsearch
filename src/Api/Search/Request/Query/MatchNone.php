@@ -2,12 +2,22 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Request\Query;
 
-class MatchNone
+use CodeSolo\Elasticsearch\Api\QueryType;
+
+class MatchNone extends AbstractClause
 {
     /**
-     * @return array
+     * @inheritdoc
      */
-    public function toDsl(): array
+    protected function getType(): string
+    {
+        return QueryType::MATCH_NONE;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function getBody(): array
     {
         return [];
     }

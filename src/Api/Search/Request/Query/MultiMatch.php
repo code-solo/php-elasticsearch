@@ -2,7 +2,9 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Request\Query;
 
-class MultiMatch
+use CodeSolo\Elasticsearch\Api\QueryType;
+
+class MultiMatch extends AbstractClause
 {
     /**
      * @var string
@@ -40,9 +42,17 @@ class MultiMatch
     private $analyzer;
 
     /**
-     * @return array
+     * @inheritdoc
      */
-    public function toDsl(): array
+    protected function getType(): string
+    {
+        return QueryType::MULTI_MATCH;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function getBody(): array
     {
         $dsl = [];
         if (!is_null($this->query)) {

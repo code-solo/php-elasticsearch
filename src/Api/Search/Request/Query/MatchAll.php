@@ -2,7 +2,9 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Request\Query;
 
-class MatchAll
+use CodeSolo\Elasticsearch\Api\QueryType;
+
+class MatchAll extends AbstractClause
 {
     /**
      * @var float
@@ -10,9 +12,17 @@ class MatchAll
     private $boost;
 
     /**
-     * @return array
+     * @inheritdoc
      */
-    public function toDsl(): array
+    protected function getType(): string
+    {
+        return QueryType::MATCH_ALL;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function getBody(): array
     {
         $dsl = [];
         if (!is_null($this->boost)) {

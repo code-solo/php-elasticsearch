@@ -2,7 +2,9 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Request\Query;
 
-class MatchPhrase
+use CodeSolo\Elasticsearch\Api\QueryType;
+
+class MatchPhrase extends AbstractClause
 {
     /**
      * @var MatchPhrase\Message|string
@@ -10,9 +12,17 @@ class MatchPhrase
     private $message;
 
     /**
-     * @return array
+     * @inheritdoc
      */
-    public function toDsl(): array
+    protected function getType(): string
+    {
+        return QueryType::MATCH_PHRASE;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function getBody(): array
     {
         $dsl = [];
         if (!is_null($this->message)) {

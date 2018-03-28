@@ -2,7 +2,9 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Request\Query;
 
-class MatchPhrasePrefix
+use CodeSolo\Elasticsearch\Api\QueryType;
+
+class MatchPhrasePrefix extends AbstractClause
 {
     /**
      * @var MatchPhrasePrefix\Message|string
@@ -10,9 +12,17 @@ class MatchPhrasePrefix
     private $message;
 
     /**
-     * @return array
+     * @inheritdoc
      */
-    public function toDsl(): array
+    protected function getType(): string
+    {
+        return QueryType::MATCH_PHRASE_PREFIX;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function getBody(): array
     {
         $dsl = [];
         if (!is_null($this->message)) {

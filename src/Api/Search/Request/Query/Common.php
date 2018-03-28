@@ -2,7 +2,9 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Request\Query;
 
-class Common
+use CodeSolo\Elasticsearch\Api\QueryType;
+
+class Common extends AbstractClause
 {
     /**
      * @var Common\Body
@@ -10,9 +12,17 @@ class Common
     private $body;
 
     /**
-     * @return array
+     * @inheritdoc
      */
-    public function toDsl(): array
+    protected function getType(): string
+    {
+        return QueryType::COMMON;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function getBody(): array
     {
         $dsl = [];
         if (!is_null($this->body)) {
