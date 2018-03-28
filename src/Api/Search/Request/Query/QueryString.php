@@ -110,6 +110,16 @@ class QueryString
     private $autoGenerateSynonymsPhraseQuery;
 
     /**
+     * @var array
+     */
+    private $fields;
+
+    /**
+     * @var int
+     */
+    private $tieBreaker;
+
+    /**
      * @return array
      */
     public function toDsl(): array
@@ -139,27 +149,51 @@ class QueryString
         if (!is_null($this->fuzzyMaxExpansions)) {
             $dsl['fuzzy_max_expansions'] = $this->fuzzyMaxExpansions;
         }
-//        if (!is_null($this->)) {
-//            $dsl[''] = $this->;
-//        }
-//        if (!is_null($this->)) {
-//            $dsl[''] = $this->;
-//        }
-//        if (!is_null($this->)) {
-//            $dsl[''] = $this->;
-//        }
-//        if (!is_null($this->)) {
-//            $dsl[''] = $this->;
-//        }
-//        if (!is_null($this->)) {
-//            $dsl[''] = $this->;
-//        }
-//        if (!is_null($this->)) {
-//            $dsl[''] = $this->;
-//        }
-//        if (!is_null($this->)) {
-//            $dsl[''] = $this->;
-//        }
+        if (!is_null($this->fuzziness)) {
+            $dsl['fuzziness'] = $this->fuzziness;
+        }
+        if (!is_null($this->fuzzyPrefixLength)) {
+            $dsl['fuzzy_prefix_length'] = $this->fuzzyPrefixLength;
+        }
+        if (!is_null($this->fuzzyTranspositions)) {
+            $dsl['fuzzy_transpositions'] = $this->fuzzyTranspositions;
+        }
+        if (!is_null($this->phraseSlop)) {
+            $dsl['phrase_slop'] = $this->phraseSlop;
+        }
+        if (!is_null($this->boost)) {
+            $dsl['boost'] = $this->boost;
+        }
+        if (!is_null($this->autoGeneratePhraseQueries)) {
+            $dsl['auto_generate_phrase_queries'] = $this->autoGeneratePhraseQueries;
+        }
+        if (!is_null($this->analyzeWildcard)) {
+            $dsl['analyze_wildcard'] = $this->analyzeWildcard;
+        }
+        if (!is_null($this->maxDeterminizedStates)) {
+            $dsl['max_determinized_states'] = $this->maxDeterminizedStates;
+        }
+        if (!is_null($this->minimumShouldMatch)) {
+            $dsl['minimum_should_match'] = $this->minimumShouldMatch;
+        }
+        if (!is_null($this->lenient)) {
+            $dsl['lenient'] = $this->lenient;
+        }
+        if (!is_null($this->timeZone)) {
+            $dsl['time_zone'] = $this->timeZone;
+        }
+        if (!is_null($this->quoteFieldSuffix)) {
+            $dsl['quote_field_suffix'] = $this->quoteFieldSuffix;
+        }
+        if (!is_null($this->autoGenerateSynonymsPhraseQuery)) {
+            $dsl['auto_generate_synonyms_phrase_query'] = $this->autoGenerateSynonymsPhraseQuery;
+        }
+        if (!is_null($this->fields)) {
+            $dsl['fields'] = $this->fields;
+        }
+        if (!is_null($this->tieBreaker)) {
+            $dsl['tie_breaker'] = $this->tieBreaker;
+        }
         return $dsl;
     }
 
@@ -370,6 +404,26 @@ class QueryString
     public function setAutoGenerateSynonymsPhraseQuery(bool $autoGenerateSynonymsPhraseQuery): QueryString
     {
         $this->autoGenerateSynonymsPhraseQuery = $autoGenerateSynonymsPhraseQuery;
+        return $this;
+    }
+
+    /**
+     * @param array $fields
+     * @return QueryString|static
+     */
+    public function setFields(array $fields): QueryString
+    {
+        $this->fields = $fields;
+        return $this;
+    }
+
+    /**
+     * @param int $tieBreaker
+     * @return QueryString|static
+     */
+    public function setTieBreaker(int $tieBreaker): QueryString
+    {
+        $this->tieBreaker = $tieBreaker;
         return $this;
     }
 }

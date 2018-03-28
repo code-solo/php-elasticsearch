@@ -4,7 +4,7 @@ namespace CodeSolo\Elasticsearch\Api\Search\Aggregations\Metrics\Avg;
 
 use CodeSolo\Elasticsearch\Api\Search\Aggregations\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\Search\Aggregations\Script;
-use CodeSolo\Elasticsearch\Api\Search\Aggregations\Type;
+use CodeSolo\Elasticsearch\Api\AggregationsType;
 
 class Request extends AbstractRequest
 {
@@ -28,7 +28,7 @@ class Request extends AbstractRequest
      */
     public function getType(): string
     {
-        return Type::METRICS_AVG;
+        return AggregationsType::METRICS_AVG;
     }
 
     /**

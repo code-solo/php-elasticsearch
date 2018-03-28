@@ -1,8 +1,8 @@
 <?php
 
-namespace CodeSolo\Elasticsearch\Api\Search\Aggregations;
+namespace CodeSolo\Elasticsearch\Api;
 
-class Type
+final class AggregationsType
 {
     const METRICS_AVG = 'avg';
     const METRICS_CARDINALITY = 'cardinality';

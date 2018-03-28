@@ -3,7 +3,7 @@
 namespace CodeSolo\Elasticsearch\Api\Search\Aggregations\Matrix\MatrixStats;
 
 use CodeSolo\Elasticsearch\Api\Search\Aggregations\AbstractRequest;
-use CodeSolo\Elasticsearch\Api\Search\Aggregations\Type;
+use CodeSolo\Elasticsearch\Api\AggregationsType;
 
 class Request extends AbstractRequest
 {
@@ -22,7 +22,7 @@ class Request extends AbstractRequest
      */
     public function getType(): string
     {
-        return Type::MATRIX_STATS;
+        return AggregationsType::MATRIX_STATS;
     }
 
     /**
