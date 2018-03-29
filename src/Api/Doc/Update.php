@@ -2,12 +2,13 @@
 
 namespace CodeSolo\Elasticsearch\Api\Doc;
 
+use CodeSolo\Elasticsearch\Api\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\Doc\Update\Response;
 use CodeSolo\Elasticsearch\Api\MultiDoc\Bulk\ToBulkDslInterface;
 use CodeSolo\Elasticsearch\Connection\ConnectionInterface;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
-class Update implements ToBulkDslInterface
+class Update extends AbstractRequest implements ToBulkDslInterface
 {
     /**
      * @var ConnectionInterface
@@ -60,12 +61,12 @@ class Update implements ToBulkDslInterface
      */
     public function toDsl(): array
     {
-        return [
-            'index' => $this->index,
-            'type' => $this->type,
-            'id' => $this->id,
-            'body' => $this->body,
-        ];
+        $dsl = parent::toDsl();
+        $dsl['index'] = $this->index;
+        $dsl['type'] = $this->type;
+        $dsl['id'] = $this->id;
+        $dsl['body'] = $this->body;
+        return $dsl;
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Aggregations\Bucket\Terms;
 
-use CodeSolo\Elasticsearch\Api\Search\Aggregations\AbstractRequest;
+use CodeSolo\Elasticsearch\Api\Search\Aggregations\Bucket\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\AggregationsType;
 
 class Request extends AbstractRequest

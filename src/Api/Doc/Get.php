@@ -2,11 +2,12 @@
 
 namespace CodeSolo\Elasticsearch\Api\Doc;
 
+use CodeSolo\Elasticsearch\Api\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\Doc\Get\Response;
 use CodeSolo\Elasticsearch\Connection\ConnectionInterface;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
-class Get
+class Get extends AbstractRequest
 {
     /**
      * @var ConnectionInterface
@@ -54,14 +55,14 @@ class Get
      */
     public function toDsl(): array
     {
-        return [
-            'index' => $this->index,
-            'type' => $this->type,
-            'id' => $this->id,
-            'client' => [
-                'ignore' => 404
-            ],
+        $dsl = parent::toDsl();
+        $dsl['index'] = $this->index;
+        $dsl['type'] = $this->type;
+        $dsl['id'] = $this->id;
+        $dsl['client'] = [
+            'ignore' => 404
         ];
+        return $dsl;
     }
 
     /**

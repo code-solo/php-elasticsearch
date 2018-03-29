@@ -2,9 +2,10 @@
 
 namespace CodeSolo\Elasticsearch\Api\MultiDoc;
 
+use CodeSolo\Elasticsearch\Api\AbstractRequest;
 use CodeSolo\Elasticsearch\Connection\ConnectionInterface;
 
-class Reindex
+class Reindex extends AbstractRequest
 {
     /**
      * @var ConnectionInterface

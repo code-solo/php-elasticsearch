@@ -2,10 +2,11 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search;
 
+use CodeSolo\Elasticsearch\Api\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\Search\Request\Aggregations;
 use CodeSolo\Elasticsearch\Api\Search\Request\Query;
 
-class Request
+class Request extends AbstractRequest
 {
     /**
      * @var int|null
@@ -32,7 +33,7 @@ class Request
      */
     public function toDsl(): array
     {
-        $dsl = [];
+        $dsl = parent::toDsl();
         if (!is_null($this->from)) {
             $dsl['from'] = $this->from;
         }

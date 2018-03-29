@@ -2,12 +2,13 @@
 
 namespace CodeSolo\Elasticsearch\Api\MultiDoc;
 
+use CodeSolo\Elasticsearch\Api\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\MultiDoc\Bulk\Response;
 use CodeSolo\Elasticsearch\Api\MultiDoc\Bulk\ToBulkDslInterface;
 use CodeSolo\Elasticsearch\Connection\ConnectionInterface;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
-class Bulk
+class Bulk extends AbstractRequest
 {
     /**
      * @var ConnectionInterface
@@ -55,9 +56,8 @@ class Bulk
      */
     public function toDsl(): array
     {
-        $dsl = [
-            'body' => $this->body
-        ];
+        $dsl = parent::toDsl();
+        $dsl['body'] = $this->body;
         if (!is_null($this->index)) {
             $dsl['index'] = $this->index;
         }

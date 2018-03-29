@@ -2,13 +2,8 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Request;
 
-class Query
-{
-    /**
-     * @return array
-     */
-    public function toDsl(): array
-    {
+use CodeSolo\Elasticsearch\Api\AbstractRequest;
 
-    }
+class Query extends AbstractRequest
+{
 }

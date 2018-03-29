@@ -2,11 +2,12 @@
 
 namespace CodeSolo\Elasticsearch\Api\MultiDoc;
 
+use CodeSolo\Elasticsearch\Api\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\MultiDoc\DeleteByQuery\Response;
 use CodeSolo\Elasticsearch\Connection\ConnectionInterface;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
-class DeleteByQuery
+class DeleteByQuery extends AbstractRequest
 {
     /**
      * @var ConnectionInterface
@@ -54,10 +55,9 @@ class DeleteByQuery
      */
     public function toDsl(): array
     {
-        $dsl = [
-            'index' => $this->index,
-            'body' => $this->body,
-        ];
+        $dsl = parent::toDsl();
+        $dsl['index'] = $this->index;
+        $dsl['body'] = $this->body;
         if (!is_null($this->type)) {
             $dsl['type'] = $this->type;
         }

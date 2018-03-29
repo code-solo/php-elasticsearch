@@ -2,7 +2,9 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Aggregations;
 
-abstract class AbstractRequest
+use CodeSolo\Elasticsearch\Api\AbstractRequest as Base;
+
+abstract class AbstractRequest extends Base
 {
     /**
      * @var string
@@ -34,7 +36,7 @@ abstract class AbstractRequest
     public function toDsl(): array
     {
         return [
-            $this->getType() => $this->getBody(),
+            $this->getType() => array_merge(parent::toDsl(), $this->getBody()),
         ];
     }
 

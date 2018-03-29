@@ -2,11 +2,12 @@
 
 namespace CodeSolo\Elasticsearch\Api\MultiDoc;
 
+use CodeSolo\Elasticsearch\Api\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\MultiDoc\MGet\Response;
 use CodeSolo\Elasticsearch\Connection\ConnectionInterface;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
-class MGet
+class MGet extends AbstractRequest
 {
     /**
      * @var ConnectionInterface
@@ -54,9 +55,8 @@ class MGet
      */
     public function toDsl(): array
     {
-        $dsl = [
-            'body' => $this->body,
-        ];
+        $dsl = parent::toDsl();
+        $dsl['body'] = $this->body;
         if (!is_null($this->index)) {
             $dsl['index'] = $this->index;
         }

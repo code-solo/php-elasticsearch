@@ -2,9 +2,10 @@
 
 namespace CodeSolo\Elasticsearch\Api\MultiDoc\MGet;
 
+use CodeSolo\Elasticsearch\Api\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\MultiDoc\MGet\Body\Doc;
 
-class Body
+class Body extends AbstractRequest
 {
     /**
      * @var Doc[]
@@ -21,7 +22,7 @@ class Body
      */
     public function toDsl(): array
     {
-        $dsl = [];
+        $dsl = parent::toDsl();
         if ($this->docs) {
             $dsl['docs'] = array_map(function(Doc $doc) {
                 return $doc->toDsl();
