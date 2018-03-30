@@ -2,7 +2,9 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Request\Query;
 
-abstract class AbstractClause
+use CodeSolo\Elasticsearch\Api\AbstractRequest;
+
+abstract class AbstractClause extends AbstractRequest
 {
     /**
      * @return string
@@ -20,7 +22,7 @@ abstract class AbstractClause
     public function toDsl(): array
     {
         return [
-            $this->getType() => $this->getBody(),
+            $this->getType() => array_merge(parent::toDsl(), $this->getBody()),
         ];
     }
 }

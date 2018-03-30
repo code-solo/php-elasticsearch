@@ -14,16 +14,6 @@ class Request extends AbstractRequest
 
     /**
      * @inheritdoc
-     * @param string $field
-     */
-    public function __construct(string $name, string $field)
-    {
-        parent::__construct($name);
-        $this->field = $field;
-    }
-
-    /**
-     * @inheritdoc
      */
     public function getType(): string
     {
@@ -38,5 +28,15 @@ class Request extends AbstractRequest
         return [
             'field' => $this->field,
         ];
+    }
+
+    /**
+     * @param string $field
+     * @return Request|static
+     */
+    public function setField(string $field): Request
+    {
+        $this->field = $field;
+        return $this;
     }
 }

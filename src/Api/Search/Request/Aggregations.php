@@ -2,9 +2,10 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Request;
 
+use CodeSolo\Elasticsearch\Api\AbstractRequest as Base;
 use CodeSolo\Elasticsearch\Api\Search\Aggregations\AbstractRequest;
 
-class Aggregations
+class Aggregations extends Base
 {
     /**
      * @var AbstractRequest[]
@@ -16,7 +17,7 @@ class Aggregations
      */
     public function toDsl(): array
     {
-        $dsl = [];
+        $dsl = parent::toDsl();
         foreach ($this->items as $item) {
             $dsl[$item->getName()] = $item->toDsl();
         }
