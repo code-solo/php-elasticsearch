@@ -19,22 +19,22 @@ class BoolQuery extends AbstractClause
     /**
      * @var AbstractClause[]
      */
-    private $mustClauses;
+    private $mustClauses = [];
 
     /**
      * @var AbstractClause[]
      */
-    private $mustNotClauses;
+    private $mustNotClauses = [];
 
     /**
      * @var AbstractClause[]
      */
-    private $filterClauses;
+    private $filterClauses = [];
 
     /**
      * @var AbstractClause[]
      */
-    private $shouldClauses;
+    private $shouldClauses = [];
 
     /**
      * @inheritdoc
@@ -107,7 +107,7 @@ class BoolQuery extends AbstractClause
      */
     public function addToMustNot(AbstractClause $clause): BoolQuery
     {
-        $this->mustNotClauses = $clause;
+        $this->mustNotClauses[] = $clause;
         return $this;
     }
 
@@ -117,7 +117,7 @@ class BoolQuery extends AbstractClause
      */
     public function addToFilter(AbstractClause $clause): BoolQuery
     {
-        $this->filterClauses = $clause;
+        $this->filterClauses[] = $clause;
         return $this;
     }
 
@@ -127,7 +127,7 @@ class BoolQuery extends AbstractClause
      */
     public function addToShould(AbstractClause $clause): BoolQuery
     {
-        $this->shouldClauses = $clause;
+        $this->shouldClauses[] = $clause;
         return $this;
     }
 
