@@ -19,7 +19,7 @@ class DisMax extends AbstractClause
     /**
      * @var AbstractClause[]
      */
-    private $queries = [];
+    private $queriesClauses = [];
 
     /**
      * @inheritdoc
@@ -41,10 +41,8 @@ class DisMax extends AbstractClause
         if (!is_null($this->tieBreaker)) {
             $dsl['tie_breaker'] = $this->tieBreaker;
         }
-        if ($this->queries) {
-            $dsl['queries'] = array_map(function (AbstractClause $clause) {
-                return $clause->toDsl();
-            }, $this->queries);
+        if ($this->queriesClauses) {
+            $dsl['queries'] = $this->clausesToDsl($this->queriesClauses);
         }
         return $dsl;
     }
@@ -75,7 +73,21 @@ class DisMax extends AbstractClause
      */
     public function addToQueries(AbstractClause $clause): BoolQuery
     {
-        $this->queries[] = $clause;
+        $this->queriesClauses[] = $clause;
         return $this;
+    }
+
+    /**
+     * @param AbstractClause[] $clauses
+     * @return array
+     */
+    private function clausesToDsl(array $clauses): array
+    {
+        if (count($clauses) === 1) {
+            return $clauses[0]->toDsl();
+        }
+        return array_map(function (AbstractClause $clause) {
+            return $clause->toDsl();
+        }, $clauses);
     }
 }

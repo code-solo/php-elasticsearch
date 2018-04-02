@@ -34,12 +34,7 @@ class ConstantScore extends AbstractClause
             $dsl['boost'] = $this->boost;
         }
         if ($this->filterClauses) {
-            if (count($this->filterClauses) === 1) {
-                $dsl['filter'] = $this->filterClauses[0]->toDsl();
-            }
-            $dsl['filter'] = array_map(function (AbstractClause $clause) {
-                return $clause->toDsl();
-            }, $this->filterClauses);
+            $dsl['filter'] = $this->clausesToDsl($this->filterClauses);
         }
         return $dsl;
     }
@@ -62,5 +57,19 @@ class ConstantScore extends AbstractClause
     {
         $this->filterClauses[] = $clause;
         return $this;
+    }
+
+    /**
+     * @param AbstractClause[] $clauses
+     * @return array
+     */
+    private function clausesToDsl(array $clauses): array
+    {
+        if (count($clauses) === 1) {
+            return $clauses[0]->toDsl();
+        }
+        return array_map(function (AbstractClause $clause) {
+            return $clause->toDsl();
+        }, $clauses);
     }
 }
