@@ -1,8 +1,8 @@
 <?php
 
-namespace CodeSolo\Elasticsearch\Api\Search\Aggregations;
+namespace CodeSolo\Elasticsearch\Api;
 
-class Script
+class Script extends AbstractRequest
 {
     /**
      * @var string
@@ -29,7 +29,7 @@ class Script
      */
     public function toDsl(): array
     {
-        $dsl = [];
+        $dsl = parent::toDsl();
         if (!is_null($this->id)) {
             $dsl['id'] = $this->id;
         }

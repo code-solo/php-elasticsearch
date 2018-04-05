@@ -3,7 +3,7 @@
 namespace CodeSolo\Elasticsearch\Api\Search\Aggregations\Metrics\Avg;
 
 use CodeSolo\Elasticsearch\Api\Search\Aggregations\AbstractRequest;
-use CodeSolo\Elasticsearch\Api\Search\Aggregations\Script;
+use CodeSolo\Elasticsearch\Api\Script;
 use CodeSolo\Elasticsearch\Api\AggregationsType;
 
 class Request extends AbstractRequest
