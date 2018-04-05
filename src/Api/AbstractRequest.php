@@ -7,7 +7,7 @@ abstract class AbstractRequest
     /**
      * @var array
      */
-    private $params = [];
+    private $customParams = [];
 
     /**
      * @return array
@@ -15,7 +15,7 @@ abstract class AbstractRequest
     public function toDsl(): array
     {
         $dsl = [];
-        foreach ($this->params as $name => $value) {
+        foreach ($this->customParams as $name => $value) {
             $dsl[$name] = ($value instanceof self) ? $value->toDsl() : $value;
         }
         return $dsl;
@@ -26,9 +26,9 @@ abstract class AbstractRequest
      * @param $value
      * @return AbstractRequest|static
      */
-    public function setParam(string $name, $value): AbstractRequest
+    public function setCustomParam(string $name, $value): AbstractRequest
     {
-        $this->params[$name] = $value;
+        $this->customParams[$name] = $value;
         return $this;
     }
 }
