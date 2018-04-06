@@ -2,7 +2,9 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Request\Query\MatchPhrase;
 
-class Message
+use CodeSolo\Elasticsearch\Api\AbstractRequest;
+
+class Params extends AbstractRequest
 {
     /**
      * @var string
@@ -19,7 +21,7 @@ class Message
      */
     public function toDsl(): array
     {
-        $dsl = [];
+        $dsl = parent::toDsl();
         if (!is_null($this->query)) {
             $dsl['query'] = $this->query;
         }
@@ -31,9 +33,9 @@ class Message
 
     /**
      * @param string $query
-     * @return Message|static
+     * @return Params|static
      */
-    public function setQuery(string $query): Message
+    public function setQuery(string $query): Params
     {
         $this->query = $query;
         return $this;
@@ -41,9 +43,9 @@ class Message
 
     /**
      * @param string $analyzer
-     * @return Message|static
+     * @return Params|static
      */
-    public function setAnalyzer(string $analyzer): Message
+    public function setAnalyzer(string $analyzer): Params
     {
         $this->analyzer = $analyzer;
         return $this;

@@ -2,7 +2,9 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Request\Query\Match;
 
-class Message
+use CodeSolo\Elasticsearch\Api\AbstractRequest;
+
+class Params extends AbstractRequest
 {
     /**
      * @var string
@@ -29,7 +31,7 @@ class Message
      */
     public function toDsl(): array
     {
-        $dsl = [];
+        $dsl = parent::toDsl();
         if (!is_null($this->query)) {
             $dsl['query'] = $this->query;
         }
@@ -47,9 +49,9 @@ class Message
 
     /**
      * @param string $query
-     * @return Message|static
+     * @return Params|static
      */
-    public function setQuery(string $query): Message
+    public function setQuery(string $query): Params
     {
         $this->query = $query;
         return $this;
@@ -57,9 +59,9 @@ class Message
 
     /**
      * @param string $operator
-     * @return Message|static
+     * @return Params|static
      */
-    public function setOperator(string $operator): Message
+    public function setOperator(string $operator): Params
     {
         $this->operator = $operator;
         return $this;
@@ -67,9 +69,9 @@ class Message
 
     /**
      * @param string $zeroTermsQuery
-     * @return Message|static
+     * @return Params|static
      */
-    public function setZeroTermsQuery(string $zeroTermsQuery): Message
+    public function setZeroTermsQuery(string $zeroTermsQuery): Params
     {
         $this->zeroTermsQuery = $zeroTermsQuery;
         return $this;
@@ -77,9 +79,9 @@ class Message
 
     /**
      * @param float $cutoffFrequency
-     * @return Message|static
+     * @return Params|static
      */
-    public function setCutoffFrequency(float $cutoffFrequency): Message
+    public function setCutoffFrequency(float $cutoffFrequency): Params
     {
         $this->cutoffFrequency = $cutoffFrequency;
         return $this;

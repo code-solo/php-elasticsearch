@@ -2,14 +2,29 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Request\Query;
 
+use CodeSolo\Elasticsearch\Api\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\QueryType;
 
 class MatchPhrasePrefix extends AbstractClause
 {
     /**
-     * @var MatchPhrasePrefix\Message|string
+     * @var string
      */
-    private $message;
+    private $field;
+
+    /**
+     * @var MatchPhrasePrefix\Params|string
+     */
+    private $params;
+
+    /**
+     * MatchPhrasePrefix constructor.
+     * @param string $field
+     */
+    public function __construct(string $field)
+    {
+        $this->field = $field;
+    }
 
     /**
      * @inheritdoc
@@ -24,21 +39,18 @@ class MatchPhrasePrefix extends AbstractClause
      */
     protected function getBody(): array
     {
-        $dsl = [];
-        if (!is_null($this->message)) {
-            $dsl['message'] = is_object($this->message)
-                ? $this->message->toDsl() : $this->message;
-        }
-        return $dsl;
+        return [
+            $this->field => ($this->params instanceof MatchPhrasePrefix\Params) ? $this->params->toDsl() : $this->params
+        ];
     }
 
     /**
-     * @param MatchPhrasePrefix\Message|string $message
+     * @param MatchPhrasePrefix\Params|string $params
      * @return MatchPhrasePrefix
      */
-    public function setMessage($message): MatchPhrasePrefix
+    public function setParams($params): MatchPhrasePrefix
     {
-        $this->message = $message;
+        $this->params = $params;
         return $this;
     }
 }

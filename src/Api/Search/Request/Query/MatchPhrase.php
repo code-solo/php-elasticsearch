@@ -7,9 +7,23 @@ use CodeSolo\Elasticsearch\Api\QueryType;
 class MatchPhrase extends AbstractClause
 {
     /**
-     * @var MatchPhrase\Message|string
+     * @var string
      */
-    private $message;
+    private $field;
+
+    /**
+     * @var MatchPhrase\Params|string
+     */
+    private $params;
+
+    /**
+     * MatchPhrase constructor.
+     * @param string $field
+     */
+    public function __construct(string $field)
+    {
+        $this->field = $field;
+    }
 
     /**
      * @inheritdoc
@@ -24,21 +38,18 @@ class MatchPhrase extends AbstractClause
      */
     protected function getBody(): array
     {
-        $dsl = [];
-        if (!is_null($this->message)) {
-            $dsl['message'] = is_string($this->message)
-                ? $this->message : $this->message->toDsl();
-        }
-        return $dsl;
+        return [
+            $this->field => ($this->params instanceof MatchPhrase\Params) ? $this->params->toDsl() : $this->params
+        ];
     }
 
     /**
-     * @param MatchPhrase\Message|string $message
+     * @param MatchPhrase\Params|string $params
      * @return MatchPhrase
      */
-    public function setMessage($message): MatchPhrase
+    public function setParams($params): MatchPhrase
     {
-        $this->message = $message;
+        $this->params = $params;
         return $this;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Request\Query\MatchPhrasePrefix;
 
-class Message
+class Params
 {
     /**
      * @var string
@@ -31,9 +31,9 @@ class Message
 
     /**
      * @param string $query
-     * @return Message|static
+     * @return Params|static
      */
-    public function setQuery(string $query): Message
+    public function setQuery(string $query): Params
     {
         $this->query = $query;
         return $this;
@@ -41,9 +41,9 @@ class Message
 
     /**
      * @param int $maxExpansions
-     * @return Message|static
+     * @return Params|static
      */
-    public function setMaxExpansions(int $maxExpansions): Message
+    public function setMaxExpansions(int $maxExpansions): Params
     {
         $this->maxExpansions = $maxExpansions;
         return $this;
