@@ -40,7 +40,7 @@ class Body
             $dsl['low_freq_operator'] = $this->lowFreqOperator;
         }
         if (!is_null($this->minimumShouldMatch)) {
-            $dsl['minimum_should_match'] = is_object($this->minimumShouldMatch)
+            $dsl['minimum_should_match'] = $this->minimumShouldMatch instanceof Body\MinimumShouldMatch
                 ? $this->minimumShouldMatch->toDsl() : $this->minimumShouldMatch;
         }
         return $dsl;
@@ -77,10 +77,10 @@ class Body
     }
 
     /**
-     * @param $minimumShouldMatch
+     * @param Body\MinimumShouldMatch|int|string $minimumShouldMatch
      * @return Body|static
      */
-    public function set($minimumShouldMatch): Body
+    public function setMinimumShouldMatch($minimumShouldMatch): Body
     {
         $this->minimumShouldMatch = $minimumShouldMatch;
         return $this;
