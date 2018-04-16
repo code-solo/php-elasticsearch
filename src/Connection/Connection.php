@@ -4,7 +4,6 @@ namespace CodeSolo\Elasticsearch\Connection;
 
 use Elasticsearch\ClientBuilder;
 use Elasticsearch\Client;
-use CodeSolo\Elasticsearch\Api\Search;
 
 class Connection implements ConnectionInterface
 {
@@ -29,13 +28,5 @@ class Connection implements ConnectionInterface
     public function getClient(): Client
     {
         return $this->client;
-    }
-
-    /**
-     * @return Search
-     */
-    public function search(): Search
-    {
-        return new Search($this);
     }
 }
