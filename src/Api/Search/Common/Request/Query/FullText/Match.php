@@ -33,6 +33,11 @@ class Match extends AbstractClause
     private $cutoffFrequency;
 
     /**
+     * @var bool
+     */
+    private $autoGenerateSynonymsPhraseQuery;
+
+    /**
      * Match constructor.
      * @param string $field
      */
@@ -63,6 +68,9 @@ class Match extends AbstractClause
         }
         if (!is_null($this->cutoffFrequency)) {
             $dsl['cutoff_frequency'] = $this->cutoffFrequency;
+        }
+        if (!is_null($this->autoGenerateSynonymsPhraseQuery)) {
+            $dsl['auto_generate_synonyms_phrase_query'] = $this->autoGenerateSynonymsPhraseQuery;
         }
         if ($dsl) {
             $dsl['query'] = $this->query;
@@ -109,6 +117,16 @@ class Match extends AbstractClause
     public function setCutoffFrequency(float $cutoffFrequency): Match
     {
         $this->cutoffFrequency = $cutoffFrequency;
+        return $this;
+    }
+
+    /**
+     * @param bool $autoGenerateSynonymsPhraseQuery
+     * @return Match|static
+     */
+    public function setAutoGenerateSynonymsPhraseQuery(bool $autoGenerateSynonymsPhraseQuery): Match
+    {
+        $this->autoGenerateSynonymsPhraseQuery = $autoGenerateSynonymsPhraseQuery;
         return $this;
     }
 }
