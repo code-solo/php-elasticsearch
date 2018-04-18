@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeSolo\Elasticsearch\Api\Search\Count;
+namespace CodeSolo\Elasticsearch\Api\Search\Validate;
 
 use CodeSolo\Elasticsearch\Api\Search\Common\Response\Shards;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
@@ -8,9 +8,9 @@ use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 class Response
 {
     /**
-     * @var int
+     * @var bool
      */
-    private $count;
+    private $valid;
 
     /**
      * @var Shards
@@ -24,13 +24,13 @@ class Response
      */
     public static function fromRawData(array $data): Response
     {
-        if (!array_key_exists('count', $data) ||
+        if (!array_key_exists('valid', $data) ||
             !array_key_exists('_shards', $data)
         ) {
             throw new InvalidRawData();
         }
         $instance = new static();
-        $instance->count = $data['count'];
+        $instance->valid = $data['valid'];
         $instance->shards = Shards::fromRawData($data['_shards']);
         return $instance;
     }
@@ -43,11 +43,11 @@ class Response
     }
 
     /**
-     * @return int
+     * @return bool
      */
-    public function getCount(): int
+    public function getValid(): bool
     {
-        return $this->count;
+        return $this->valid;
     }
 
     /**

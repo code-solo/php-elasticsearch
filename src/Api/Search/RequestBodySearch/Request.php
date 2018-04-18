@@ -3,6 +3,8 @@
 namespace CodeSolo\Elasticsearch\Api\Search\RequestBodySearch;
 
 use CodeSolo\Elasticsearch\Api\AbstractRequest;
+use CodeSolo\Elasticsearch\Api\Search\Common\Request\Aggregations;
+use CodeSolo\Elasticsearch\Api\Search\Common\Request\Query;
 
 class Request extends AbstractRequest
 {
@@ -17,12 +19,12 @@ class Request extends AbstractRequest
     private $size;
 
     /**
-     * @var Request\Query|null
+     * @var Query|null
      */
     private $query;
 
     /**
-     * @var Request\Aggregations|null
+     * @var Aggregations|null
      */
     private $aggregations;
 
@@ -68,20 +70,20 @@ class Request extends AbstractRequest
     }
 
     /**
-     * @param Request\Query $query
+     * @param Query $query
      * @return static
      */
-    public function setQuery(Request\Query $query): Request
+    public function setQuery(Query $query): Request
     {
         $this->query = $query;
         return $this;
     }
 
     /**
-     * @param Request\Aggregations $aggregations
+     * @param Aggregations $aggregations
      * @return static
      */
-    public function setAggregations(Request\Aggregations $aggregations): Request
+    public function setAggregations(Aggregations $aggregations): Request
     {
         $this->aggregations = $aggregations;
         return $this;

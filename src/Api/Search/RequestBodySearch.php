@@ -3,6 +3,8 @@
 namespace CodeSolo\Elasticsearch\Api\Search;
 
 use CodeSolo\Elasticsearch\Api\AbstractRequest;
+use CodeSolo\Elasticsearch\Api\Search\Common\Request\Aggregations;
+use CodeSolo\Elasticsearch\Api\Search\Common\Request\Query;
 use CodeSolo\Elasticsearch\Connection\ConnectionInterface;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
@@ -107,20 +109,20 @@ class RequestBodySearch extends AbstractRequest
     }
 
     /**
-     * @param RequestBodySearch\Request\Query $query
+     * @param Query $query
      * @return static
      */
-    public function setQuery(RequestBodySearch\Request\Query $query): RequestBodySearch
+    public function setQuery(Query $query): RequestBodySearch
     {
         $this->body->setQuery($query);
         return $this;
     }
 
     /**
-     * @param RequestBodySearch\Request\Aggregations $aggregations
+     * @param Aggregations $aggregations
      * @return static
      */
-    public function setAggregations(RequestBodySearch\Request\Aggregations $aggregations): RequestBodySearch
+    public function setAggregations(Aggregations $aggregations): RequestBodySearch
     {
         $this->body->setAggregations($aggregations);
         return $this;

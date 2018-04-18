@@ -1,8 +1,8 @@
 <?php
 
-namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations;
+namespace CodeSolo\Elasticsearch\Api\Search\Common\Response\Aggregations;
 
-use CodeSolo\Elasticsearch\Api\Search\Response\Aggregations;
+use CodeSolo\Elasticsearch\Api\Search\Common\Response\Aggregations;
 
 trait HasAggregationsTrait
 {

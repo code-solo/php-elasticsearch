@@ -2,8 +2,9 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\RequestBodySearch;
 
-use CodeSolo\Elasticsearch\Api\Search\Aggregations\HasAggregationsTrait;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
+use CodeSolo\Elasticsearch\Api\Search\Common\Response\Aggregations\HasAggregationsTrait;
+use CodeSolo\Elasticsearch\Api\Search\Common\Response\Shards;
 
 class Response
 {
@@ -20,7 +21,7 @@ class Response
     private $timedOut;
 
     /**
-     * @var Response\Shards
+     * @var Shards
      */
     private $shards;
 
@@ -46,7 +47,7 @@ class Response
         $instance = new static();
         $instance->took = $data['took'];
         $instance->timedOut = $data['timed_out'];
-        $instance->shards = Response\Shards::fromRawData($data['_shards']);
+        $instance->shards = Shards::fromRawData($data['_shards']);
         $instance->hits = Response\Hits::fromRawData($data['hits']);
 
         if (array_key_exists('aggregations', $data)) {
@@ -79,9 +80,9 @@ class Response
     }
 
     /**
-     * @return Response\Shards
+     * @return Shards
      */
-    public function getShards(): Response\Shards
+    public function getShards(): Shards
     {
         return $this->shards;
     }

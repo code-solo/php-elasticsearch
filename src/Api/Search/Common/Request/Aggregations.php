@@ -1,9 +1,9 @@
 <?php
 
-namespace CodeSolo\Elasticsearch\Api\Search\RequestBodySearch\Request;
+namespace CodeSolo\Elasticsearch\Api\Search\Common\Request;
 
 use CodeSolo\Elasticsearch\Api\AbstractRequest as Base;
-use CodeSolo\Elasticsearch\Api\Search\Aggregations\AbstractRequest;
+use \CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\AbstractRequest;
 
 class Aggregations extends Base
 {

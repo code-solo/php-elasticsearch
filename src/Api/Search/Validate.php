@@ -7,7 +7,7 @@ use CodeSolo\Elasticsearch\Api\Search\Common\Request\Query;
 use CodeSolo\Elasticsearch\Connection\ConnectionInterface;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
-class Count extends AbstractRequest
+class Validate extends AbstractRequest
 {
     /**
      * @var ConnectionInterface
@@ -36,26 +36,26 @@ class Count extends AbstractRequest
     public function __construct(ConnectionInterface $connection)
     {
         $this->connection = $connection;
-        $this->body = new Count\Request();
+        $this->body = new Validate\Request();
     }
 
     /**
-     * @return Count\Response
+     * @return Validate\Response
      * @throws InvalidRawData
      */
-    public function do(): Count\Response
+    public function do(): Validate\Response
     {
         $response = $this->connection->getClient()->count(
             $this->toDsl()
         );
-        return Count\Response::fromRawData($response);
+        return Validate\Response::fromRawData($response);
     }
 
     /**
      * @param string $index
      * @return static
      */
-    public function setIndex(string $index): Count
+    public function setIndex(string $index): Validate
     {
         $this->index = $index;
         return $this;
@@ -65,7 +65,7 @@ class Count extends AbstractRequest
      * @param string $type
      * @return static
      */
-    public function setType(string $type): Count
+    public function setType(string $type): Validate
     {
         $this->type = $type;
         return $this;
@@ -75,7 +75,7 @@ class Count extends AbstractRequest
      * @param Query $query
      * @return static
      */
-    public function setQuery(Query $query): Count
+    public function setQuery(Query $query): Validate
     {
         $this->body->setQuery($query);
         return $this;

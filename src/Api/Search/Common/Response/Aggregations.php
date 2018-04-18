@@ -1,9 +1,9 @@
 <?php
 
-namespace CodeSolo\Elasticsearch\Api\Search\RequestBodySearch\Response;
+namespace CodeSolo\Elasticsearch\Api\Search\Common\Response;
 
 use CodeSolo\Elasticsearch\Api\AggregationsType;
-use CodeSolo\Elasticsearch\Api\Search\Aggregations as Aggs;
+use CodeSolo\Elasticsearch\Api\Search\Common\Aggregations as Aggs;
 
 class Aggregations
 {

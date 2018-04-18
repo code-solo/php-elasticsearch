@@ -2,7 +2,7 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Bucket\Terms\Response;
 
-use CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\HasAggregationsTrait;
+use CodeSolo\Elasticsearch\Api\Search\Common\Response\Aggregations\HasAggregationsTrait;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Bucket
