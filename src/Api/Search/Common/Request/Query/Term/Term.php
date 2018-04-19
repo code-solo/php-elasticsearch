@@ -67,10 +67,10 @@ class Term extends AbstractClause
     }
 
     /**
-     * @param string $boost
+     * @param float $boost
      * @return Term|static
      */
-    public function setBoost(string $boost): Term
+    public function setBoost(float $boost): Term
     {
         $this->boost = $boost;
         return $this;
