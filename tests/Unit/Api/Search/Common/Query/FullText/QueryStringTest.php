@@ -1,7 +1,8 @@
 <?php
 
-namespace CodeSolo\ElasticsearchTests\Unit\Api\Search\Common\Query;
+namespace CodeSolo\ElasticsearchTests\Unit\Api\Search\Common\Query\FullTest;
 
+use CodeSolo\ElasticsearchTests\Unit\Api\Search\Common\Query\AbstractTest;
 use CodeSolo\Elasticsearch\Api\Search\Common\Request\Query\FullText\QueryString;
 
 class QueryStringTest extends AbstractTest
