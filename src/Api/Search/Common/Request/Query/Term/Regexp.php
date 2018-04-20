@@ -23,6 +23,16 @@ class Regexp extends AbstractClause
     private $boost;
 
     /**
+     * @var string
+     */
+    private $flags;
+
+    /**
+     * @var int
+     */
+    private $maxDeterminizedStates;
+
+    /**
      * Regexp constructor.
      * @param string $field
      */
@@ -36,7 +46,7 @@ class Regexp extends AbstractClause
      */
     protected function getType(): string
     {
-        return QueryType::WILDCARD;
+        return QueryType::REGEXP;
     }
 
     /**
@@ -47,6 +57,12 @@ class Regexp extends AbstractClause
         $dsl = [];
         if (!is_null($this->boost)) {
             $dsl['boost'] = $this->boost;
+        }
+        if (!is_null($this->flags)) {
+            $dsl['flags'] = $this->flags;
+        }
+        if (!is_null($this->maxDeterminizedStates)) {
+            $dsl['max_determinized_states'] = $this->maxDeterminizedStates;
         }
         if ($dsl) {
             $dsl['value'] = $this->value;
@@ -67,12 +83,32 @@ class Regexp extends AbstractClause
     }
 
     /**
-     * @param string $boost
+     * @param float $boost
      * @return Regexp|static
      */
-    public function setBoost(string $boost): Regexp
+    public function setBoost(float $boost): Regexp
     {
         $this->boost = $boost;
+        return $this;
+    }
+
+    /**
+     * @param string $flags
+     * @return Regexp|static
+     */
+    public function setFlags(string $flags): Regexp
+    {
+        $this->flags = $flags;
+        return $this;
+    }
+
+    /**
+     * @param int $maxDeterminizedStates
+     * @return Regexp|static
+     */
+    public function setMaxDeterminizedStates(int $maxDeterminizedStates): Regexp
+    {
+        $this->maxDeterminizedStates = $maxDeterminizedStates;
         return $this;
     }
 }

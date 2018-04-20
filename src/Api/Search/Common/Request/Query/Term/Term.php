@@ -57,10 +57,10 @@ class Term extends AbstractClause
     }
 
     /**
-     * @param string $value
+     * @param mixed $value
      * @return Term|static
      */
-    public function setValue(string $value): Term
+    public function setValue($value): Term
     {
         $this->value = $value;
         return $this;

@@ -7,27 +7,21 @@ use CodeSolo\Elasticsearch\Api\Search\Common\Request\Query\AbstractClause;
 
 class Func extends AbstractRequest
 {
+    use HasScoreFunctionsTrait;
+
     /**
      * @var AbstractClause[]
      */
     private $filterClauses = [];
 
     /**
-     * @var int
-     */
-    private $weight;
-
-    /**
      * @return array
      */
     public function toDsl(): array
     {
-        $dsl = parent::toDsl();
+        $dsl = array_merge(parent::toDsl(), $this->getScoreFunctionsDsl());
         if ($this->filterClauses) {
             $dsl['filter'] = $this->clausesToDsl($this->filterClauses);
-        }
-        if (!is_null($this->weight)) {
-            $dsl['weight'] = $this->weight;
         }
         return $dsl;
     }
@@ -39,16 +33,6 @@ class Func extends AbstractRequest
     public function addToFilter(AbstractClause $clause): Func
     {
         $this->filterClauses[] = $clause;
-        return $this;
-    }
-
-    /**
-     * @param int $weight
-     * @return Func|static
-     */
-    public function setWeight(int $weight): Func
-    {
-        $this->weight = $weight;
         return $this;
     }
 

@@ -99,10 +99,10 @@ class Fuzzy extends AbstractClause
     }
 
     /**
-     * @param string $boost
+     * @param float $boost
      * @return Fuzzy|static
      */
-    public function setBoost(string $boost): Fuzzy
+    public function setBoost(float $boost): Fuzzy
     {
         $this->boost = $boost;
         return $this;

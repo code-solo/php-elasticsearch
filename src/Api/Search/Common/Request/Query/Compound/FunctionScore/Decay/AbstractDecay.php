@@ -1,11 +1,16 @@
 <?php
 
-namespace CodeSolo\Elasticsearch\Api\Search\Common\Request\Query\Compound\FunctionScore;
+namespace CodeSolo\Elasticsearch\Api\Search\Common\Request\Query\Compound\FunctionScore\Decay;
 
 use CodeSolo\Elasticsearch\Api\AbstractRequest;
 
-class Gauss extends AbstractRequest
+abstract class AbstractDecay extends AbstractRequest
 {
+    /**
+     * @var string
+     */
+    private $multiValueMode;
+
     /**
      * @var string
      */
@@ -41,20 +46,41 @@ class Gauss extends AbstractRequest
     }
 
     /**
+     * @return string
+     */
+    abstract protected function getType(): string;
+
+    /**
      * @return array
      */
     public function toDsl(): array
     {
+        $dsl = [
+            $this->field => $this->getBody(),
+        ];
+        if (!is_null($this->multiValueMode)) {
+            $dsl['multi_value_mode'] = $this->multiValueMode;
+        }
         return [
-            $this->field => $this->getBody()
+            $this->getType() => array_merge(parent::toDsl(), $dsl)
         ];
     }
 
     /**
-     * @param string|int $origin
-     * @return Gauss|static
+     * @param string $multiValueMode
+     * @return static
      */
-    public function setOrigin($origin): Gauss
+    public function setMultiValueMode($multiValueMode): AbstractDecay
+    {
+        $this->multiValueMode = $multiValueMode;
+        return $this;
+    }
+
+    /**
+     * @param string|int $origin
+     * @return static
+     */
+    public function setOrigin($origin): AbstractDecay
     {
         $this->origin = $origin;
         return $this;
@@ -62,9 +88,9 @@ class Gauss extends AbstractRequest
 
     /**
      * @param string $scale
-     * @return Gauss|static
+     * @return static
      */
-    public function setScale(string $scale): Gauss
+    public function setScale(string $scale): AbstractDecay
     {
         $this->scale = $scale;
         return $this;
@@ -72,9 +98,9 @@ class Gauss extends AbstractRequest
 
     /**
      * @param string $offset
-     * @return Gauss|static
+     * @return static
      */
-    public function setOffset(string $offset): Gauss
+    public function setOffset(string $offset): AbstractDecay
     {
         $this->offset = $offset;
         return $this;
@@ -82,9 +108,9 @@ class Gauss extends AbstractRequest
 
     /**
      * @param float $decay
-     * @return Gauss|static
+     * @return static
      */
-    public function setDecay(float $decay): Gauss
+    public function setDecay(float $decay): AbstractDecay
     {
         $this->decay = $decay;
         return $this;

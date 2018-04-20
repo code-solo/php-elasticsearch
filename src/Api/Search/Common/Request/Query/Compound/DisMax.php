@@ -50,9 +50,9 @@ class DisMax extends AbstractClause
 
     /**
      * @param float $boost
-     * @return BoolQuery|static
+     * @return static
      */
-    public function setBoost(float $boost): BoolQuery
+    public function setBoost(float $boost): DisMax
     {
         $this->boost = $boost;
         return $this;
@@ -60,9 +60,9 @@ class DisMax extends AbstractClause
 
     /**
      * @param float $tieBreaker
-     * @return BoolQuery|static
+     * @return static
      */
-    public function setTieBreaker(float $tieBreaker): BoolQuery
+    public function setTieBreaker(float $tieBreaker): DisMax
     {
         $this->tieBreaker = $tieBreaker;
         return $this;
@@ -70,9 +70,9 @@ class DisMax extends AbstractClause
 
     /**
      * @param AbstractClause $clause
-     * @return BoolQuery|static
+     * @return static
      */
-    public function addToQueries(AbstractClause $clause): BoolQuery
+    public function addToQueries(AbstractClause $clause): DisMax
     {
         $this->queriesClauses[] = $clause;
         return $this;

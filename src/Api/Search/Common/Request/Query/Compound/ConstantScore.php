@@ -42,9 +42,9 @@ class ConstantScore extends AbstractClause
 
     /**
      * @param float $boost
-     * @return BoolQuery|static
+     * @return static
      */
-    public function setBoost(float $boost): BoolQuery
+    public function setBoost(float $boost): ConstantScore
     {
         $this->boost = $boost;
         return $this;
@@ -52,9 +52,9 @@ class ConstantScore extends AbstractClause
 
     /**
      * @param AbstractClause $clause
-     * @return BoolQuery|static
+     * @return static
      */
-    public function addToFilter(AbstractClause $clause): BoolQuery
+    public function addToFilter(AbstractClause $clause): ConstantScore
     {
         $this->filterClauses[] = $clause;
         return $this;

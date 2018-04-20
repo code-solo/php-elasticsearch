@@ -67,10 +67,10 @@ class Wildcard extends AbstractClause
     }
 
     /**
-     * @param string $boost
+     * @param float $boost
      * @return Wildcard|static
      */
-    public function setBoost(string $boost): Wildcard
+    public function setBoost(float $boost): Wildcard
     {
         $this->boost = $boost;
         return $this;

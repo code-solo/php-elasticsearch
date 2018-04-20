@@ -4,16 +4,19 @@ namespace CodeSolo\Elasticsearch\Api\Search\Common\Request\Query\Compound;
 
 use CodeSolo\Elasticsearch\Api\QueryType;
 use CodeSolo\Elasticsearch\Api\Search\Common\Request\Query\AbstractClause;
+use CodeSolo\Elasticsearch\Api\Search\Common\Request\Query\Compound\FunctionScore\HasScoreFunctionsTrait;
 
 class FunctionScore extends AbstractClause
 {
+    use HasScoreFunctionsTrait;
+
     /**
      * @var AbstractClause[]
      */
     private $queryClauses = [];
 
     /**
-     * @var string
+     * @var float
      */
     private $boost;
 
@@ -43,26 +46,6 @@ class FunctionScore extends AbstractClause
     private $minScore;
 
     /**
-     * @var FunctionScore\ScriptScore
-     */
-    private $scriptScore;
-
-    /**
-     * @var FunctionScore\RandomScore
-     */
-    private $randomScore;
-
-    /**
-     * @var FunctionScore\FieldValueFactor
-     */
-    private $fieldValueFactor;
-
-    /**
-     * @var FunctionScore\Gauss
-     */
-    private $gauss;
-
-    /**
      * @inheritdoc
      */
     protected function getType(): string
@@ -75,7 +58,7 @@ class FunctionScore extends AbstractClause
      */
     protected function getBody(): array
     {
-        $dsl = [];
+        $dsl = $this->getScoreFunctionsDsl();
         if ($this->queryClauses) {
             $dsl['query'] = $this->clausesToDsl($this->queryClauses);
         }
@@ -99,18 +82,6 @@ class FunctionScore extends AbstractClause
         if (!is_null($this->minScore)) {
             $dsl['min_score'] = $this->minScore;
         }
-        if (!is_null($this->scriptScore)) {
-            $dsl['script_score'] = $this->scriptScore->toDsl();
-        }
-        if (!is_null($this->randomScore)) {
-            $dsl['random_score'] = $this->randomScore->toDsl();
-        }
-        if (!is_null($this->fieldValueFactor)) {
-            $dsl['field_value_factor'] = $this->fieldValueFactor->toDsl();
-        }
-        if (!is_null($this->gauss)) {
-            $dsl['gauss'] = $this->gauss->toDsl();
-        }
         return $dsl;
     }
 
@@ -125,10 +96,10 @@ class FunctionScore extends AbstractClause
     }
 
     /**
-     * @param string $boost
+     * @param float $boost
      * @return FunctionScore|static
      */
-    public function setBoost(string $boost): FunctionScore
+    public function setBoost(float $boost): FunctionScore
     {
         $this->boost = $boost;
         return $this;
@@ -181,46 +152,6 @@ class FunctionScore extends AbstractClause
     public function setMinScore(int $minScore): FunctionScore
     {
         $this->minScore = $minScore;
-        return $this;
-    }
-
-    /**
-     * @param FunctionScore\ScriptScore $scriptScore
-     * @return FunctionScore|static
-     */
-    public function setScriptScore(FunctionScore\ScriptScore $scriptScore): FunctionScore
-    {
-        $this->scriptScore = $scriptScore;
-        return $this;
-    }
-
-    /**
-     * @param FunctionScore\RandomScore $randomScore
-     * @return FunctionScore|static
-     */
-    public function setRandomScore(FunctionScore\RandomScore $randomScore): FunctionScore
-    {
-        $this->randomScore = $randomScore;
-        return $this;
-    }
-
-    /**
-     * @param FunctionScore\FieldValueFactor $fieldValueFactor
-     * @return FunctionScore|static
-     */
-    public function setFieldValueFactor(FunctionScore\FieldValueFactor $fieldValueFactor): FunctionScore
-    {
-        $this->fieldValueFactor = $fieldValueFactor;
-        return $this;
-    }
-
-    /**
-     * @param FunctionScore\Gauss $gauss
-     * @return FunctionScore|static
-     */
-    public function setGauss(FunctionScore\Gauss $gauss): FunctionScore
-    {
-        $this->gauss = $gauss;
         return $this;
     }
 

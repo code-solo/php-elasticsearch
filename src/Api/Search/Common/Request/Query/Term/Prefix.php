@@ -67,10 +67,10 @@ class Prefix extends AbstractClause
     }
 
     /**
-     * @param string $boost
+     * @param float $boost
      * @return Prefix|static
      */
-    public function setBoost(string $boost): Prefix
+    public function setBoost(float $boost): Prefix
     {
         $this->boost = $boost;
         return $this;

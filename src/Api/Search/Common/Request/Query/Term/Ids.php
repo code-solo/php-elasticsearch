@@ -55,5 +55,6 @@ class Ids extends AbstractClause
     public function setType(string $type): Ids
     {
         $this->type = $type;
+        return $this;
     }
 }
