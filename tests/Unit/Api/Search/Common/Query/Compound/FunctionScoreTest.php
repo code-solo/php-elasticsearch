@@ -133,7 +133,7 @@ class FunctionScoreTest extends AbstractTest
                     ->setModifier('sqrt')
                     ->setMissing(1)
             )
-            ->addDecayFunction(
+            ->setLinear(
                 (new FunctionScore\Decay\Linear('date'))
                     ->setOrigin('2013-09-17')
                     ->setScale('10d')
@@ -141,7 +141,7 @@ class FunctionScoreTest extends AbstractTest
                     ->setDecay(0.5)
                     ->setMultiValueMode('min')
             )
-            ->addDecayFunction(
+            ->setExp(
                 (new FunctionScore\Decay\Exp('date'))
                     ->setOrigin('2013-09-18')
                     ->setScale('11d')
@@ -149,7 +149,7 @@ class FunctionScoreTest extends AbstractTest
                     ->setDecay(0.6)
                     ->setMultiValueMode('max')
             )
-            ->addDecayFunction(
+            ->setGauss(
                 (new FunctionScore\Decay\Gauss('date'))
                     ->setOrigin('2013-09-19')
                     ->setScale('12d')

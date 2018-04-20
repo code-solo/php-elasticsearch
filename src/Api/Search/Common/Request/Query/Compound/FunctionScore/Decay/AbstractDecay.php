@@ -46,24 +46,16 @@ abstract class AbstractDecay extends AbstractRequest
     }
 
     /**
-     * @return string
-     */
-    abstract protected function getType(): string;
-
-    /**
      * @return array
      */
     public function toDsl(): array
     {
-        $dsl = [
-            $this->field => $this->getBody(),
-        ];
+        $dsl = parent::toDsl();
+        $dsl[$this->field] = $this->getBody();
         if (!is_null($this->multiValueMode)) {
             $dsl['multi_value_mode'] = $this->multiValueMode;
         }
-        return [
-            $this->getType() => array_merge(parent::toDsl(), $dsl)
-        ];
+        return $dsl;
     }
 
     /**

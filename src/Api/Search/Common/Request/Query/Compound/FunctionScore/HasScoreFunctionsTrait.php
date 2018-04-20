@@ -25,9 +25,19 @@ trait HasScoreFunctionsTrait
     private $fieldValueFactor;
 
     /**
-     * @var Decay\AbstractDecay[]
+     * @var Decay\Linear
      */
-    private $decayFunctions = [];
+    private $linear;
+
+    /**
+     * @var Decay\Exp
+     */
+    private $exp;
+
+    /**
+     * @var Decay\Gauss
+     */
+    private $gauss;
 
     /**
      * @return array
@@ -47,8 +57,14 @@ trait HasScoreFunctionsTrait
         if (!is_null($this->fieldValueFactor)) {
             $dsl['field_value_factor'] = $this->fieldValueFactor->toDsl();
         }
-        foreach ($this->decayFunctions as $item) {
-            $dsl = array_merge($dsl, $item->toDsl());
+        if (!is_null($this->linear)) {
+            $dsl['linear'] = $this->linear->toDsl();
+        }
+        if (!is_null($this->exp)) {
+            $dsl['exp'] = $this->exp->toDsl();
+        }
+        if (!is_null($this->gauss)) {
+            $dsl['gauss'] = $this->gauss->toDsl();
         }
         return $dsl;
     }
@@ -94,12 +110,32 @@ trait HasScoreFunctionsTrait
     }
 
     /**
-     * @param Decay\AbstractDecay $decay
+     * @param Decay\Linear $linear
      * @return static
      */
-    public function addDecayFunction(Decay\AbstractDecay $decay)
+    public function setLinear(Decay\Linear $linear)
     {
-        $this->decayFunctions[] = $decay;
+        $this->linear = $linear;
+        return $this;
+    }
+
+    /**
+     * @param Decay\Exp $exp
+     * @return static
+     */
+    public function setExp(Decay\Exp $exp)
+    {
+        $this->exp = $exp;
+        return $this;
+    }
+
+    /**
+     * @param Decay\Gauss $gauss
+     * @return static
+     */
+    public function setGauss(Decay\Gauss $gauss)
+    {
+        $this->gauss = $gauss;
         return $this;
     }
 }

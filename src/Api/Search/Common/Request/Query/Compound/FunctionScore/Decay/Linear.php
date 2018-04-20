@@ -4,11 +4,4 @@ namespace CodeSolo\Elasticsearch\Api\Search\Common\Request\Query\Compound\Functi
 
 class Linear extends AbstractDecay
 {
-    /**
-     * @inheritdoc
-     */
-    protected function getType(): string
-    {
-        return DecayType::LINEAR;
-    }
 }
