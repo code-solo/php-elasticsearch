@@ -18,6 +18,11 @@ class ParentId extends AbstractClause
     private $id;
 
     /**
+     * @var bool
+     */
+    private $ignoreUnmapped;
+
+    /**
      * @inheritdoc
      */
     protected function getType(): string
@@ -36,6 +41,9 @@ class ParentId extends AbstractClause
         }
         if (!is_null($this->id)) {
             $dsl['id'] = $this->id;
+        }
+        if (!is_null($this->ignoreUnmapped)) {
+            $dsl['ignore_unmapped'] = $this->ignoreUnmapped;
         }
         return $dsl;
     }
@@ -57,6 +65,16 @@ class ParentId extends AbstractClause
     public function setId(string $id): ParentId
     {
         $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @param bool $ignoreUnmapped
+     * @return ParentId|static
+     */
+    public function setIgnoreUnmapped(bool $ignoreUnmapped): ParentId
+    {
+        $this->ignoreUnmapped = $ignoreUnmapped;
         return $this;
     }
 }

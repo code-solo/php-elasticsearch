@@ -2,9 +2,10 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Common\Response;
 
+use CodeSolo\Elasticsearch\Api\AbstractResponse;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
-class Shards
+class Shards extends AbstractResponse
 {
     /**
      * @var int
@@ -27,9 +28,7 @@ class Shards
     private $failed;
 
     /**
-     * @param array $data
-     * @return Shards|static
-     * @throws InvalidRawData
+     * @inheritdoc
      */
     public static function fromRawData(array $data): Shards
     {
@@ -46,6 +45,19 @@ class Shards
         $instance->skipped = $data['skipped'];
         $instance->failed = $data['failed'];
         return $instance;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toRawData(): array
+    {
+        return [
+            'total' => $this->getTotal(),
+            'successful' => $this->getSuccessful(),
+            'skipped' => $this->getSkipped(),
+            'failed' => $this->getFailed(),
+        ];
     }
 
     /**

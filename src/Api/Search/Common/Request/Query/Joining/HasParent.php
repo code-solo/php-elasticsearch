@@ -27,7 +27,7 @@ class HasParent extends AbstractClause
      */
     protected function getType(): string
     {
-        return QueryType::HAS_CHILD;
+        return QueryType::HAS_PARENT;
     }
 
     /**
@@ -52,7 +52,7 @@ class HasParent extends AbstractClause
      * @param string $parentType
      * @return HasParent|static
      */
-    public function setType(string $parentType): HasParent
+    public function setParentType(string $parentType): HasParent
     {
         $this->parentType = $parentType;
         return $this;
