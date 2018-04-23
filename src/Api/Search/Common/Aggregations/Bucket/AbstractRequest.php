@@ -3,7 +3,7 @@
 namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Bucket;
 
 use CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\AbstractRequest as Base;
-use CodeSolo\Elasticsearch\Api\Search\RequestBodySearch\Request\Aggregations;
+use CodeSolo\Elasticsearch\Api\Search\Common\Request\Aggregations;
 
 abstract class AbstractRequest extends Base
 {

@@ -2,10 +2,11 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Count;
 
+use CodeSolo\Elasticsearch\Api\AbstractResponse;
 use CodeSolo\Elasticsearch\Api\Search\Common\Response\Shards;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
-class Response
+class Response extends AbstractResponse
 {
     /**
      * @var int
@@ -18,9 +19,7 @@ class Response
     private $shards;
 
     /**
-     * @param array $data
-     * @return Response|static
-     * @throws InvalidRawData
+     * @inheritdoc
      */
     public static function fromRawData(array $data): Response
     {
@@ -36,10 +35,14 @@ class Response
     }
 
     /**
-     * Response constructor.
+     * @inheritdoc
      */
-    private function __construct()
+    public function toRawData(): array
     {
+        return [
+            'count' => $this->getCount(),
+            '_shards' => $this->getShards()->toRawData(),
+        ];
     }
 
     /**

@@ -2,11 +2,12 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\RequestBodySearch;
 
+use CodeSolo\Elasticsearch\Api\AbstractResponse;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 use CodeSolo\Elasticsearch\Api\Search\Common\Response\Aggregations\HasAggregationsTrait;
 use CodeSolo\Elasticsearch\Api\Search\Common\Response\Shards;
 
-class Response
+class Response extends AbstractResponse
 {
     use HasAggregationsTrait;
 
@@ -31,9 +32,7 @@ class Response
     private $hits;
 
     /**
-     * @param array $data
-     * @return Response|static
-     * @throws InvalidRawData
+     * @inheritdoc
      */
     public static function fromRawData(array $data): Response
     {
@@ -57,10 +56,16 @@ class Response
     }
 
     /**
-     * Response constructor.
+     * @inheritdoc
      */
-    private function __construct()
+    public function toRawData(): array
     {
+        return [
+            'took' => $this->getTook(),
+            'timed_out' => $this->getTimedOut(),
+            '_shards' => $this->getShards()->toRawData(),
+            'hits' => $this->getHits()->toRawData(),
+        ];
     }
 
     /**

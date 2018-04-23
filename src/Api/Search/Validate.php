@@ -52,6 +52,22 @@ class Validate extends AbstractRequest
     }
 
     /**
+     * @return array
+     */
+    public function toDsl(): array
+    {
+        $dsl = [];
+        if (!is_null($this->index)) {
+            $dsl['index'] = $this->index;
+        }
+        if (!is_null($this->type)) {
+            $dsl['type'] = $this->type;
+        }
+        $dsl['body'] = $this->body->toDsl();
+        return $dsl;
+    }
+
+    /**
      * @param string $index
      * @return static
      */

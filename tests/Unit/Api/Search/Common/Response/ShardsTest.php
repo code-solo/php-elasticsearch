@@ -7,9 +7,17 @@ use CodeSolo\ElasticsearchTests\Unit\AbstractTest;
 
 class ShardsTest extends AbstractTest
 {
+    /**
+     * @return void
+     */
     public function test1()
     {
-        $data = [];
+        $data = [
+            'total' => 1,
+            'successful' => 1,
+            'skipped' => 0,
+            'failed' => 0,
+        ];
         $shards = Shards::fromRawData($data);
         $this->assertArraySame($data, $shards->toRawData());
     }

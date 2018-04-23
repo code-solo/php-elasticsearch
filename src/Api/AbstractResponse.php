@@ -17,4 +17,11 @@ abstract class AbstractResponse
      * @return array
      */
     abstract public function toRawData(): array;
+
+    /**
+     * AbstractResponse constructor.
+     */
+    protected function __construct()
+    {
+    }
 }

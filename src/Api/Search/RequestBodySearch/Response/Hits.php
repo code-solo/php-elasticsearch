@@ -2,9 +2,10 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\RequestBodySearch\Response;
 
+use CodeSolo\Elasticsearch\Api\AbstractResponse;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
-class Hits
+class Hits extends AbstractResponse
 {
     /**
      * @var int
@@ -17,9 +18,7 @@ class Hits
     private $hits = [];
 
     /**
-     * @param array $data
-     * @return Hits|static
-     * @throws InvalidRawData
+     * @inheritdoc
      */
     public static function fromRawData(array $data): Hits
     {
@@ -32,6 +31,17 @@ class Hits
         $instance->total = $data['total'];
         $instance->hits = $data['hits'];
         return $instance;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toRawData(): array
+    {
+        return [
+            'total' => $this->getTotal(),
+            'hits' => $this->getHits(),
+        ];
     }
 
     /**
