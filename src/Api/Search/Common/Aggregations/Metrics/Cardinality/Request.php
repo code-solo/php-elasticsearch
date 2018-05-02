@@ -2,6 +2,7 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Metrics\Cardinality;
 
+use CodeSolo\Elasticsearch\Api\Script;
 use CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\AggregationsType;
 
@@ -21,6 +22,11 @@ class Request extends AbstractRequest
      * @var int
      */
     private $precisionThreshold;
+
+    /**
+     * @var Script
+     */
+    private $script;
 
     /**
      * @inheritdoc
@@ -45,6 +51,9 @@ class Request extends AbstractRequest
         if (!is_null($this->precisionThreshold)) {
             $dsl['precision_threshold'] = $this->precisionThreshold;
         }
+        if (!is_null($this->script)) {
+            $dsl['script'] = $this->script->toDsl();
+        }
         return $dsl;
     }
 
@@ -59,10 +68,10 @@ class Request extends AbstractRequest
     }
 
     /**
-     * @param float $missing
+     * @param $missing
      * @return Request|static
      */
-    public function setMissing(float $missing): Request
+    public function setMissing($missing): Request
     {
         $this->missing = $missing;
         return $this;
@@ -75,6 +84,16 @@ class Request extends AbstractRequest
     public function setPrecisionThreshold(int $precisionThreshold): Request
     {
         $this->precisionThreshold = $precisionThreshold;
+        return $this;
+    }
+
+    /**
+     * @param Script $script
+     * @return Request|static
+     */
+    public function setScript(Script $script): Request
+    {
+        $this->script = $script;
         return $this;
     }
 }

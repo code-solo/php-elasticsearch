@@ -25,10 +25,10 @@ abstract class AbstractRequest extends Base
     }
 
     /**
-     * @param AbstractRequest $item
+     * @param Base $item
      * @return static
      */
-    public function addAggregationsItem(AbstractRequest $item): AbstractRequest
+    public function addAggregationsItem(Base $item): AbstractRequest
     {
         $this->aggregations = $this->aggregations ?? new Aggregations();
         $this->aggregations->addItem($item);

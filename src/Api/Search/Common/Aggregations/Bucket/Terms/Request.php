@@ -13,6 +13,16 @@ class Request extends AbstractRequest
     private $field;
 
     /**
+     * @var int
+     */
+    private $size;
+
+    /**
+     * @var bool
+     */
+    private $showTermDocCountError;
+
+    /**
      * @inheritdoc
      */
     public function getType(): string
@@ -25,9 +35,17 @@ class Request extends AbstractRequest
      */
     protected function getBody(): array
     {
-        return [
-            'field' => $this->field,
-        ];
+        $dsl = [];
+        if (!is_null($this->field)) {
+            $dsl['field'] = $this->field;
+        }
+        if (!is_null($this->size)) {
+            $dsl['size'] = $this->size;
+        }
+        if (!is_null($this->showTermDocCountError)) {
+            $dsl['show_term_doc_count_error'] = $this->showTermDocCountError;
+        }
+        return $dsl;
     }
 
     /**
@@ -37,6 +55,26 @@ class Request extends AbstractRequest
     public function setField(string $field): Request
     {
         $this->field = $field;
+        return $this;
+    }
+
+    /**
+     * @param int $size
+     * @return Request|static
+     */
+    public function setSize(int $size): Request
+    {
+        $this->size = $size;
+        return $this;
+    }
+
+    /**
+     * @param bool $showTermDocCountError
+     * @return Request|static
+     */
+    public function setShowTermDocCountError(bool $showTermDocCountError): Request
+    {
+        $this->showTermDocCountError = $showTermDocCountError;
         return $this;
     }
 }

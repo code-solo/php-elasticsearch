@@ -2,6 +2,7 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Metrics\ExtendedStats;
 
+use CodeSolo\Elasticsearch\Api\Script;
 use CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\AggregationsType;
 
@@ -13,7 +14,7 @@ class Request extends AbstractRequest
     private $field;
 
     /**
-     * @var float
+     * @var mixed
      */
     private $missing;
 
@@ -23,11 +24,16 @@ class Request extends AbstractRequest
     private $sigma;
 
     /**
+     * @var Script
+     */
+    private $script;
+
+    /**
      * @inheritdoc
      */
     public function getType(): string
     {
-        return AggregationsType::METRICS_CARDINALITY;
+        return AggregationsType::METRICS_EXTENDED_STATS;
     }
 
     /**
@@ -45,6 +51,9 @@ class Request extends AbstractRequest
         if (!is_null($this->sigma)) {
             $dsl['sigma'] = $this->sigma;
         }
+        if (!is_null($this->script)) {
+            $dsl['script'] = $this->script->toDsl();
+        }
         return $dsl;
     }
 
@@ -59,10 +68,10 @@ class Request extends AbstractRequest
     }
 
     /**
-     * @param float $missing
+     * @param $missing
      * @return Request|static
      */
-    public function setMissing(float $missing): Request
+    public function setMissing($missing): Request
     {
         $this->missing = $missing;
         return $this;
@@ -75,6 +84,16 @@ class Request extends AbstractRequest
     public function setSigma(float $sigma): Request
     {
         $this->sigma = $sigma;
+        return $this;
+    }
+
+    /**
+     * @param Script $script
+     * @return Request|static
+     */
+    public function setScript(Script $script): Request
+    {
+        $this->script = $script;
         return $this;
     }
 }

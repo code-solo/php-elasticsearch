@@ -19,7 +19,7 @@ class Request extends AbstractRequest
     private $missing;
 
     /**
-     * @var Script|null
+     * @var Script
      */
     private $script;
 
@@ -60,10 +60,10 @@ class Request extends AbstractRequest
     }
 
     /**
-     * @param float $missing
+     * @param $missing
      * @return Request|static
      */
-    public function setMissing(float $missing): Request
+    public function setMissing($missing): Request
     {
         $this->missing = $missing;
         return $this;
@@ -71,9 +71,9 @@ class Request extends AbstractRequest
 
     /**
      * @param Script $script
-     * @return Response|static
+     * @return Request|static
      */
-    public function setScript(Script $script): Response
+    public function setScript(Script $script): Request
     {
         $this->script = $script;
         return $this;
