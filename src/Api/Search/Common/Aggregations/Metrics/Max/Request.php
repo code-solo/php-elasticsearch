@@ -2,6 +2,7 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Metrics\Max;
 
+use CodeSolo\Elasticsearch\Api\Script;
 use CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\AggregationsType;
 
@@ -16,6 +17,11 @@ class Request extends AbstractRequest
      * @var float
      */
     private $missing;
+
+    /**
+     * @var Script
+     */
+    private $script;
 
     /**
      * @inheritdoc
@@ -37,6 +43,9 @@ class Request extends AbstractRequest
         if (!is_null($this->missing)) {
             $dsl['missing'] = $this->missing;
         }
+        if (!is_null($this->script)) {
+            $dsl['script'] = $this->script->toDsl();
+        }
         return $dsl;
     }
 
@@ -57,6 +66,16 @@ class Request extends AbstractRequest
     public function setMissing(float $missing): Request
     {
         $this->missing = $missing;
+        return $this;
+    }
+
+    /**
+     * @param Script $script
+     * @return Request|static
+     */
+    public function setScript(Script $script): Request
+    {
+        $this->script = $script;
         return $this;
     }
 }

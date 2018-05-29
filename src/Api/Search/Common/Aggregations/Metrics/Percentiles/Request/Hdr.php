@@ -25,7 +25,7 @@ class Hdr
      * @param int $numberOfSignificantValueDigits
      * @return Hdr|static
      */
-    public function setCompression(int $numberOfSignificantValueDigits): Hdr
+    public function setNumberOfSignificantValueDigits(int $numberOfSignificantValueDigits): Hdr
     {
         $this->numberOfSignificantValueDigits = $numberOfSignificantValueDigits;
         return $this;
