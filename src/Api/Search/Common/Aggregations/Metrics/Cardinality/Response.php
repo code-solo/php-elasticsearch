@@ -28,6 +28,16 @@ class Response extends AbstractResponse
     }
 
     /**
+     * @inheritdoc
+     */
+    public function toRawData(): array
+    {
+        return [
+            'value' => $this->value,
+        ];
+    }
+
+    /**
      * @return float
      */
     public function getValue(): float

@@ -2,9 +2,10 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Metrics\GeoBounds\Response;
 
+use CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\AbstractResponse;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
-class Bounds
+class Bounds extends AbstractResponse
 {
     /**
      * @var Bounds\Location
@@ -32,6 +33,17 @@ class Bounds
         $instance->topLeft = Bounds\Location::fromRawData($data['top_left']);
         $instance->bottomRight = Bounds\Location::fromRawData($data['bottom_right']);
         return $instance;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toRawData(): array
+    {
+        return [
+            'top_left' => $this->topLeft->toRawData(),
+            'bottom_right' => $this->bottomRight->toRawData(),
+        ];
     }
 
     /**

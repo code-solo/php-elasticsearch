@@ -28,6 +28,16 @@ class Response extends AbstractResponse
     }
 
     /**
+     * @inheritdoc
+     */
+    public function toRawData(): array
+    {
+        return [
+            'bounds' => $this->bounds->toRawData(),
+        ];
+    }
+
+    /**
      * @return Response\Bounds
      */
     public function getBounds(): Response\Bounds

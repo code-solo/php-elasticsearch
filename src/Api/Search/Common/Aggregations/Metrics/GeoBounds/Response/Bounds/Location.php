@@ -2,9 +2,10 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Metrics\GeoBounds\Response\Bounds;
 
+use CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\AbstractResponse;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
-class Location
+class Location extends AbstractResponse
 {
     /**
      * @var float
@@ -32,6 +33,17 @@ class Location
         $instance->lat = $data['lat'];
         $instance->lon = $data['lon'];
         return $instance;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toRawData(): array
+    {
+        return [
+            'lat' => $this->lat,
+            'lon' => $this->lon,
+        ];
     }
 
     /**

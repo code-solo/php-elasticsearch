@@ -86,6 +86,24 @@ class Response extends AbstractResponse
     }
 
     /**
+     * @inheritdoc
+     */
+    public function toRawData(): array
+    {
+        return [
+            'count' => $this->count,
+            'min' => $this->min,
+            'max' => $this->max,
+            'avg' => $this->avg,
+            'sum' => $this->sum,
+            'sum_of_squares' => $this->sumOfSquares,
+            'variance' => $this->variance,
+            'std_deviation' => $this->stdDeviation,
+            'std_deviation_bounds' => $this->stdDeviationBounds->toRawData(),
+        ];
+    }
+
+    /**
      * @return float
      */
     public function getCount(): float

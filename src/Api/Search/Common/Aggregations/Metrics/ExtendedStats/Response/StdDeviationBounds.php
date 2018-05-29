@@ -2,9 +2,10 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Metrics\ExtendedStats\Response;
 
+use CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\AbstractResponse;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
-class StdDeviationBounds
+class StdDeviationBounds extends AbstractResponse
 {
     /**
      * @var float
@@ -32,6 +33,17 @@ class StdDeviationBounds
         $instance->upper = $data['upper'];
         $instance->lower = $data['lower'];
         return $instance;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toRawData(): array
+    {
+        return [
+            'upper' => $this->upper,
+            'lower' => $this->lower,
+        ];
     }
 
     /**
