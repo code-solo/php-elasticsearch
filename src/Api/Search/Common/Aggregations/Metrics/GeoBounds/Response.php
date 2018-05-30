@@ -13,9 +13,7 @@ class Response extends AbstractResponse
     private $bounds;
 
     /**
-     * @param array $data
-     * @return Response|static
-     * @throws InvalidRawData
+     * @inheritdoc
      */
     public static function fromRawData(array $data): Response
     {

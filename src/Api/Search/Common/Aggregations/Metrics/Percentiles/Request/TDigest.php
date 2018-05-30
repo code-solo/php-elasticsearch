@@ -2,7 +2,9 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Metrics\Percentiles\Request;
 
-class TDigest
+use CodeSolo\Elasticsearch\Api\AbstractRequest;
+
+class TDigest extends AbstractRequest
 {
     /**
      * @var int
@@ -10,7 +12,7 @@ class TDigest
     private $compression;
 
     /**
-     * @return array
+     * @inheritdoc
      */
     public function toDsl(): array
     {
@@ -23,7 +25,7 @@ class TDigest
 
     /**
      * @param int $compression
-     * @return TDigest|static
+     * @return static
      */
     public function setCompression(int $compression): TDigest
     {

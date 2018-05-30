@@ -18,9 +18,7 @@ class StdDeviationBounds extends AbstractResponse
     private $lower;
 
     /**
-     * @param array $data
-     * @return StdDeviationBounds|static
-     * @throws InvalidRawData
+     * @inheritdoc
      */
     public static function fromRawData(array $data): StdDeviationBounds
     {

@@ -2,7 +2,9 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Metrics\Percentiles\Request;
 
-class Hdr
+use CodeSolo\Elasticsearch\Api\AbstractRequest;
+
+class Hdr extends AbstractRequest
 {
     /**
      * @var int
@@ -10,7 +12,7 @@ class Hdr
     private $numberOfSignificantValueDigits;
 
     /**
-     * @return array
+     * @inheritdoc
      */
     public function toDsl(): array
     {
@@ -23,7 +25,7 @@ class Hdr
 
     /**
      * @param int $numberOfSignificantValueDigits
-     * @return Hdr|static
+     * @return static
      */
     public function setNumberOfSignificantValueDigits(int $numberOfSignificantValueDigits): Hdr
     {

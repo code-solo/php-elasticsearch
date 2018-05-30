@@ -17,9 +17,7 @@ class Location
     private $lon;
 
     /**
-     * @param array $data
-     * @return Location|static
-     * @throws InvalidRawData
+     * @inheritdoc
      */
     public static function fromRawData(array $data): Location
     {
@@ -32,6 +30,17 @@ class Location
         $instance->lat = $data['lat'];
         $instance->lon = $data['lon'];
         return $instance;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toRawData(): array
+    {
+        return [
+            'lat' => $this->lat,
+            'lon' => $this->lon,
+        ];
     }
 
     /**

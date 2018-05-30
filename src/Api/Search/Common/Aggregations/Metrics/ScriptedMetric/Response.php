@@ -30,7 +30,9 @@ class Response extends AbstractResponse
      */
     public function toRawData(): array
     {
-        // TODO: Implement toRawData() method.
+        return [
+            'value' => $this->value,
+        ];
     }
 
     /**

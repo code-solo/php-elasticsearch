@@ -8,14 +8,12 @@ use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 class Response extends AbstractResponse
 {
     /**
-     * @var float
+     * @var int
      */
     private $value;
 
     /**
-     * @param array $data
-     * @return Response|static
-     * @throws InvalidRawData
+     * @inheritdoc
      */
     public static function fromRawData(array $data): Response
     {
@@ -28,9 +26,19 @@ class Response extends AbstractResponse
     }
 
     /**
-     * @return float
+     * @inheritdoc
      */
-    public function getValue(): float
+    public function toRawData(): array
+    {
+        return [
+            'value' => $this->value,
+        ];
+    }
+
+    /**
+     * @return int
+     */
+    public function getValue(): int
     {
         return $this->value;
     }

@@ -70,7 +70,7 @@ class Request extends AbstractRequest
 
     /**
      * @param string|Request\InitScript $initScript
-     * @return Request
+     * @return static
      */
     public function setInitScript($initScript): Request
     {
@@ -80,7 +80,7 @@ class Request extends AbstractRequest
 
     /**
      * @param string|Request\MapScript $mapScript
-     * @return Request
+     * @return static
      */
     public function setMapScript($mapScript): Request
     {
@@ -90,7 +90,7 @@ class Request extends AbstractRequest
 
     /**
      * @param string|Request\CombineScript $combineScript
-     * @return Request
+     * @return static
      */
     public function setCombineScript($combineScript): Request
     {
@@ -100,7 +100,7 @@ class Request extends AbstractRequest
 
     /**
      * @param string|Request\ReduceScript $reduceScript
-     * @return Request
+     * @return static
      */
     public function setReduceScript($reduceScript): Request
     {
@@ -110,7 +110,7 @@ class Request extends AbstractRequest
 
     /**
      * @param array $params
-     * @return Request
+     * @return static
      */
     public function setParams(array $params): Request
     {

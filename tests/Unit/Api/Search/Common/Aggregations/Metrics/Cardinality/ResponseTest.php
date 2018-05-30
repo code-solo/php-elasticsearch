@@ -7,6 +7,10 @@ use CodeSolo\ElasticsearchTests\Unit\AbstractTest;
 
 class ResponseTest extends AbstractTest
 {
+    /**
+     * @return void
+     * @throws \CodeSolo\Elasticsearch\Exception\InvalidRawData
+     */
     public function test1()
     {
         $data = [

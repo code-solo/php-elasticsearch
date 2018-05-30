@@ -18,9 +18,7 @@ class Bounds extends AbstractResponse
     private $bottomRight;
 
     /**
-     * @param array $data
-     * @return Bounds|static
-     * @throws InvalidRawData
+     * @inheritdoc
      */
     public static function fromRawData(array $data): Bounds
     {

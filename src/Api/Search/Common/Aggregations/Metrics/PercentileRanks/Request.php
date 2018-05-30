@@ -75,7 +75,7 @@ class Request extends AbstractRequest
 
     /**
      * @param string $field
-     * @return Request|static
+     * @return static
      */
     public function setField(string $field): Request
     {
@@ -85,7 +85,7 @@ class Request extends AbstractRequest
 
     /**
      * @param float[] $values
-     * @return Request|static
+     * @return static
      */
     public function setValues(array $values): Request
     {
@@ -95,7 +95,7 @@ class Request extends AbstractRequest
 
     /**
      * @param bool $keyed
-     * @return Request|static
+     * @return static
      */
     public function setKeyed(bool $keyed): Request
     {
@@ -105,7 +105,7 @@ class Request extends AbstractRequest
 
     /**
      * @param Request\Hdr $hdr
-     * @return Request|static
+     * @return static
      */
     public function setHdr(Request\Hdr $hdr): Request
     {
@@ -115,7 +115,7 @@ class Request extends AbstractRequest
 
     /**
      * @param float $missing
-     * @return Request|static
+     * @return static
      */
     public function setMissing(float $missing): Request
     {
@@ -125,7 +125,7 @@ class Request extends AbstractRequest
 
     /**
      * @param Script $script
-     * @return Request|static
+     * @return static
      */
     public function setScript(Script $script): Request
     {

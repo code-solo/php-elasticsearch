@@ -33,9 +33,7 @@ class Response extends AbstractResponse
     private $sum;
 
     /**
-     * @param array $data
-     * @return Response|static
-     * @throws InvalidRawData
+     * @inheritdoc
      */
     public static function fromRawData(array $data): Response
     {
@@ -54,6 +52,20 @@ class Response extends AbstractResponse
         $instance->avg = $data['avg'];
         $instance->sum = $data['sum'];
         return $instance;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toRawData(): array
+    {
+        return [
+            'count' => $this->count,
+            'min' => $this->min,
+            'max' => $this->max,
+            'avg' => $this->avg,
+            'sum' => $this->sum,
+        ];
     }
 
     /**

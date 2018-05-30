@@ -2,9 +2,10 @@
 
 namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Metrics\PercentileRanks\Response;
 
+use CodeSolo\Elasticsearch\Api\AbstractResponse;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
-class Value
+class Value extends AbstractResponse
 {
     /**
      * @var float
@@ -17,9 +18,7 @@ class Value
     private $key;
 
     /**
-     * @param array $data
-     * @return Value|static
-     * @throws InvalidRawData
+     * @inheritdoc
      */
     public static function fromRawData(array $data): Value
     {
@@ -32,6 +31,17 @@ class Value
         $instance->value = $data['value'];
         $instance->key = $data['key'];
         return $instance;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toRawData(): array
+    {
+        return [
+            'key' => $this->key,
+            'value' => $this->value,
+        ];
     }
 
     /**

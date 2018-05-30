@@ -13,9 +13,7 @@ class Response extends AbstractResponse
     private $value;
 
     /**
-     * @param array $data
-     * @return Response|static
-     * @throws InvalidRawData
+     * @inheritdoc
      */
     public static function fromRawData(array $data): Response
     {
@@ -25,6 +23,16 @@ class Response extends AbstractResponse
         $instance = new static();
         $instance->value = $data['value'];
         return $instance;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toRawData(): array
+    {
+        return [
+            'value' => $this->value,
+        ];
     }
 
     /**

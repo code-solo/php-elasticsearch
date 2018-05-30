@@ -18,9 +18,7 @@ class Location extends AbstractResponse
     private $lon;
 
     /**
-     * @param array $data
-     * @return Location|static
-     * @throws InvalidRawData
+     * @inheritdoc
      */
     public static function fromRawData(array $data): Location
     {

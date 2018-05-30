@@ -18,9 +18,7 @@ class Response extends AbstractResponse
     private $count;
 
     /**
-     * @param array $data
-     * @return Response|static
-     * @throws InvalidRawData
+     * @inheritdoc
      */
     public static function fromRawData(array $data): Response
     {
@@ -31,7 +29,19 @@ class Response extends AbstractResponse
         }
         $instance = new static();
         $instance->location = Response\Location::fromRawData($data['location']);
+        $instance->count = $data['count'];
         return $instance;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toRawData(): array
+    {
+        return [
+            'location' => $this->location->toRawData(),
+            'count' => $this->count,
+        ];
     }
 
     /**

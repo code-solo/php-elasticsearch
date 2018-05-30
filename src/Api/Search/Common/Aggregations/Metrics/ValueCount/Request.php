@@ -43,7 +43,7 @@ class Request extends AbstractRequest
 
     /**
      * @param string $field
-     * @return Request|static
+     * @return static
      */
     public function setField(string $field): Request
     {
@@ -53,7 +53,7 @@ class Request extends AbstractRequest
 
     /**
      * @param Script $script
-     * @return Request|static
+     * @return static
      */
     public function setScript(Script $script): Request
     {

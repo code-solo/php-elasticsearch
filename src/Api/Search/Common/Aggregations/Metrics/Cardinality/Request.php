@@ -59,7 +59,7 @@ class Request extends AbstractRequest
 
     /**
      * @param string $field
-     * @return Request|static
+     * @return static
      */
     public function setField(string $field): Request
     {
@@ -69,7 +69,7 @@ class Request extends AbstractRequest
 
     /**
      * @param $missing
-     * @return Request|static
+     * @return static
      */
     public function setMissing($missing): Request
     {
@@ -79,7 +79,7 @@ class Request extends AbstractRequest
 
     /**
      * @param int $precisionThreshold
-     * @return Request|static
+     * @return static
      */
     public function setPrecisionThreshold(int $precisionThreshold): Request
     {
@@ -89,7 +89,7 @@ class Request extends AbstractRequest
 
     /**
      * @param Script $script
-     * @return Request|static
+     * @return static
      */
     public function setScript(Script $script): Request
     {

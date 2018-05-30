@@ -13,9 +13,7 @@ class Response extends AbstractResponse
     private $values;
 
     /**
-     * @param array $data
-     * @return Response|static
-     * @throws InvalidRawData
+     * @inheritdoc
      */
     public static function fromRawData(array $data): Response
     {
@@ -23,8 +21,34 @@ class Response extends AbstractResponse
             throw new InvalidRawData();
         }
         $instance = new static();
-        $instance->values = $data['values'];
+        foreach ($data['values'] as $key => $value) {
+            if (is_array($value)) {
+                $instance->values[] = Response\Value::fromRawData($value);
+
+            } else {
+                $instance->values[$key] = $value;
+            }
+        }
         return $instance;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toRawData(): array
+    {
+        $values = [];
+        foreach ($this->values as $key => $value) {
+            if ($value instanceof Response\Value) {
+                $values[] = $value->toRawData();
+
+            } else {
+                $values[$key] = $value;
+            }
+        }
+        return [
+            'values' => $values,
+        ];
     }
 
     /**
