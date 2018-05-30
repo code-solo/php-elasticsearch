@@ -34,7 +34,7 @@ class Request extends AbstractRequest
 
     /**
      * @param array $filters
-     * @return Request|static
+     * @return static
      */
     public function setFilters(array $filters): Request
     {

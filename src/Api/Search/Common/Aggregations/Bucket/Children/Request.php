@@ -34,7 +34,7 @@ class Request extends AbstractRequest
 
     /**
      * @param string $type
-     * @return Request|static
+     * @return static
      */
     public function setType(string $type): Request
     {
