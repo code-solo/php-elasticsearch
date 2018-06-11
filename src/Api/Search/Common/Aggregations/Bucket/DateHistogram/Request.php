@@ -43,6 +43,16 @@ class Request extends AbstractRequest
     private $missing;
 
     /**
+     * @var int
+     */
+    private $minDocCount;
+
+    /**
+     * @var Request\ExtendedBounds
+     */
+    private $extendedBounds;
+
+    /**
      * @inheritdoc
      */
     public function getType(): string
@@ -76,6 +86,12 @@ class Request extends AbstractRequest
         }
         if (!is_null($this->missing)) {
             $dsl['missing'] = $this->missing;
+        }
+        if (!is_null($this->minDocCount)) {
+            $dsl['min_doc_count'] = $this->minDocCount;
+        }
+        if (!is_null($this->extendedBounds)) {
+            $dsl['extended_bounds'] = $this->extendedBounds->toDsl();
         }
         return $dsl;
     }
@@ -147,6 +163,26 @@ class Request extends AbstractRequest
     public function setMissing(string $missing): Request
     {
         $this->missing = $missing;
+        return $this;
+    }
+
+    /**
+     * @param int $minDocCount
+     * @return static
+     */
+    public function setMinDocCount(int $minDocCount): Request
+    {
+        $this->minDocCount = $minDocCount;
+        return $this;
+    }
+
+    /**
+     * @param Request\ExtendedBounds $extendedBounds
+     * @return static
+     */
+    public function setExtendedBounds(Request\ExtendedBounds $extendedBounds): Request
+    {
+        $this->extendedBounds = $extendedBounds;
         return $this;
     }
 }

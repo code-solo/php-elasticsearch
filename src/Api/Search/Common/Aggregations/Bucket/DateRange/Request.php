@@ -28,6 +28,11 @@ class Request extends AbstractRequest
     private $missing;
 
     /**
+     * @var bool
+     */
+    private $keyed;
+
+    /**
      * @var Request\Range[]
      */
     private $ranges;
@@ -57,6 +62,9 @@ class Request extends AbstractRequest
         }
         if (!is_null($this->missing)) {
             $dsl['missing'] = $this->missing;
+        }
+        if (!is_null($this->keyed)) {
+            $dsl['keyed'] = $this->keyed;
         }
         if (!is_null($this->ranges)) {
             $dsl['ranges'] = array_map(function (Request\Range $range) {
@@ -103,6 +111,16 @@ class Request extends AbstractRequest
     public function setMissing(string $missing): Request
     {
         $this->missing = $missing;
+        return $this;
+    }
+
+    /**
+     * @param bool $keyed
+     * @return static
+     */
+    public function setKeyed(bool $keyed): Request
+    {
+        $this->keyed = $keyed;
         return $this;
     }
 

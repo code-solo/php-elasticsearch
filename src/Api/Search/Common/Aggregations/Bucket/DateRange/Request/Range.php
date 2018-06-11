@@ -12,12 +12,12 @@ class Range extends AbstractRequest
     private $key;
 
     /**
-     * @var string
+     * @var int|float|string
      */
     private $from;
 
     /**
-     * @var string
+     * @var int|float|string
      */
     private $to;
 
@@ -50,20 +50,20 @@ class Range extends AbstractRequest
     }
 
     /**
-     * @param string $to
+     * @param int|float|string $to
      * @return Range
      */
-    public function setTo(string $to): Range
+    public function setTo($to): Range
     {
         $this->to = $to;
         return $this;
     }
 
     /**
-     * @param string $from
+     * @param int|float|string $from
      * @return Range
      */
-    public function setFrom(string $from): Range
+    public function setFrom($from): Range
     {
         $this->from = $from;
         return $this;

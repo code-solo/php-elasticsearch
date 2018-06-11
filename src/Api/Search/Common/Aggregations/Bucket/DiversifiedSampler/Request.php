@@ -29,6 +29,11 @@ class Request extends AbstractRequest
     private $script;
 
     /**
+     * @var string
+     */
+    private $executionHint;
+
+    /**
      * @inheritdoc
      */
     public function getType(): string
@@ -53,6 +58,9 @@ class Request extends AbstractRequest
         }
         if (!is_null($this->script)) {
             $dsl['script'] = $this->script->toDsl();
+        }
+        if (!is_null($this->executionHint)) {
+            $dsl['execution_hint'] = $this->executionHint;
         }
         return $dsl;
     }
@@ -94,6 +102,16 @@ class Request extends AbstractRequest
     public function setScript(Script $script): Request
     {
         $this->script = $script;
+        return $this;
+    }
+
+    /**
+     * @param string $executionHint
+     * @return static
+     */
+    public function setExecutionHint(string $executionHint): Request
+    {
+        $this->executionHint = $executionHint;
         return $this;
     }
 }
