@@ -17,7 +17,7 @@ class Request extends AbstractRequest
      */
     public function getType(): string
     {
-        return AggregationsType::BUCKET_NESTED;
+        return AggregationsType::BUCKET_SAMPLER;
     }
 
     /**
@@ -36,7 +36,7 @@ class Request extends AbstractRequest
      * @param int $shardSize
      * @return static
      */
-    public function setPath(int $shardSize): Request
+    public function setShardSize(int $shardSize): Request
     {
         $this->shardSize = $shardSize;
         return $this;

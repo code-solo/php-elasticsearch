@@ -68,6 +68,16 @@ class Request extends AbstractRequest
     private $executionHint;
 
     /**
+     * @var string|string[]|Request\Filter
+     */
+    private $include;
+
+    /**
+     * @var string|string[]|Request\Filter
+     */
+    private $exclude;
+
+    /**
      * @inheritdoc
      */
     public function getType(): string
@@ -94,7 +104,7 @@ class Request extends AbstractRequest
             $dsl['mutual_information'] = $this->mutualInformation->toDsl();
         }
         if (!is_null($this->percentage)) {
-            $dsl['percentage'] = $this->percentage->toDsl();
+            $dsl['percentage'] = (object) $this->percentage->toDsl();
         }
         if (!is_null($this->scriptHeuristic)) {
             $dsl['script_heuristic'] = $this->scriptHeuristic->toDsl();
@@ -116,6 +126,12 @@ class Request extends AbstractRequest
         }
         if (!is_null($this->executionHint)) {
             $dsl['execution_hint'] = $this->executionHint;
+        }
+        if (!is_null($this->include)) {
+            $dsl['include'] = $this->include instanceof Request\Filter ? $this->include->toDsl() : $this->include;
+        }
+        if (!is_null($this->exclude)) {
+            $dsl['exclude'] = $this->exclude instanceof Request\Filter ? $this->exclude->toDsl() : $this->exclude;
         }
         return $dsl;
     }
@@ -237,6 +253,26 @@ class Request extends AbstractRequest
     public function setExecutionHint(string $executionHint): Request
     {
         $this->executionHint = $executionHint;
+        return $this;
+    }
+
+    /**
+     * @param string|string[]|Request\Filter $include
+     * @return static
+     */
+    public function setInclude($include): Request
+    {
+        $this->include = $include;
+        return $this;
+    }
+
+    /**
+     * @param string|string[]|Request\Filter $exclude
+     * @return static
+     */
+    public function setExclude($exclude): Request
+    {
+        $this->exclude = $exclude;
         return $this;
     }
 }

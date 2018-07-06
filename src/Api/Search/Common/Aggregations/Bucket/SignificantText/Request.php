@@ -18,6 +18,21 @@ class Request extends AbstractRequest
     private $filterDuplicateText;
 
     /**
+     * @var Request\ChiSquare
+     */
+    private $chiSquare;
+
+    /**
+     * @var Request\Gnd
+     */
+    private $gnd;
+
+    /**
+     * @var Request\MutualInformation
+     */
+    private $mutualInformation;
+
+    /**
      * @var int
      */
     private $minDocCount;
@@ -77,6 +92,15 @@ class Request extends AbstractRequest
         if (!is_null($this->filterDuplicateText)) {
             $dsl['filter_duplicate_text'] = $this->filterDuplicateText;
         }
+        if (!is_null($this->chiSquare)) {
+            $dsl['chi_square'] = $this->chiSquare->toDsl();
+        }
+        if (!is_null($this->gnd)) {
+            $dsl['gnd'] = $this->gnd->toDsl();
+        }
+        if (!is_null($this->mutualInformation)) {
+            $dsl['mutual_information'] = $this->mutualInformation->toDsl();
+        }
         if (!is_null($this->minDocCount)) {
             $dsl['min_doc_count'] = $this->minDocCount;
         }
@@ -121,6 +145,36 @@ class Request extends AbstractRequest
     public function setFilterDuplicateText(bool $filterDuplicateText): Request
     {
         $this->filterDuplicateText = $filterDuplicateText;
+        return $this;
+    }
+
+    /**
+     * @param Request\ChiSquare $chiSquare
+     * @return static
+     */
+    public function setChiSquare(Request\ChiSquare $chiSquare): Request
+    {
+        $this->chiSquare = $chiSquare;
+        return $this;
+    }
+
+    /**
+     * @param Request\Gnd $gnd
+     * @return static
+     */
+    public function setGnd(Request\Gnd $gnd): Request
+    {
+        $this->gnd = $gnd;
+        return $this;
+    }
+
+    /**
+     * @param Request\MutualInformation $mutualInformation
+     * @return static
+     */
+    public function setMutualInformation(Request\MutualInformation $mutualInformation): Request
+    {
+        $this->mutualInformation = $mutualInformation;
         return $this;
     }
 
