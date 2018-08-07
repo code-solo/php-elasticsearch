@@ -149,9 +149,10 @@ class RequestTest extends AbstractTest
                     ->setPartition(0)
                     ->setNumPartitions(20)
             )
-            ->setExclude((new Request\Filter())
-                ->setPartition(0)
-                ->setNumPartitions(20)
+            ->setExclude(
+                (new Request\Filter())
+                    ->setPartition(0)
+                    ->setNumPartitions(20)
             );
 
         $this->assertArraySame($dsl, [
