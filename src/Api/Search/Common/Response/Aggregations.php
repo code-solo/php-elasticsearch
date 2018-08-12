@@ -4,8 +4,9 @@ namespace CodeSolo\Elasticsearch\Api\Search\Common\Response;
 
 use CodeSolo\Elasticsearch\Api\AggregationsType;
 use CodeSolo\Elasticsearch\Api\Search\Common\Aggregations as Aggs;
+use CodeSolo\Elasticsearch\Api\AbstractResponse;
 
-class Aggregations
+class Aggregations extends AbstractResponse
 {
     /**
      * @var string[]
@@ -77,14 +78,21 @@ class Aggregations
     private $rawData = [];
 
     /**
-     * @param array $data
-     * @return static
+     * @inheritdoc
      */
     public static function fromRawData(array $data)
     {
         $instance = new static();
         $instance->rawData = $data;
         return $instance;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toRawData(): array
+    {
+        return $this->rawData;
     }
 
     /**

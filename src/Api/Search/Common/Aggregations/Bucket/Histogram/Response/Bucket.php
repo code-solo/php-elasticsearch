@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Bucket\AdjacencyMatrix\Response;
+namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Bucket\Histogram\Response;
 
 use CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\AbstractResponse;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
@@ -10,19 +10,17 @@ class Bucket extends AbstractResponse
     /**
      * @var int
      */
-    private $key;
-
-    /**
-     * @var int
-     */
     private $docCount;
 
     /**
-     * @param array $data
-     * @return Bucket|static
-     * @throws InvalidRawData
+     * @var float
      */
-    public static function fromRawData(array $data): Bucket
+    private $key;
+
+    /**
+     * @inheritdoc
+     */
+    public static function fromRawData(array $data)
     {
         if (!array_key_exists('key', $data) ||
             !array_key_exists('doc_count', $data)
@@ -40,9 +38,26 @@ class Bucket extends AbstractResponse
      */
     public function toRawData(): array
     {
-        return [
+        $data = [
             'key' => $this->key,
             'doc_count' => $this->docCount,
         ];
+        return $data;
+    }
+
+    /**
+     * @return float
+     */
+    public function getKey(): float
+    {
+        return $this->key;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDocCount(): int
+    {
+        return $this->docCount;
     }
 }

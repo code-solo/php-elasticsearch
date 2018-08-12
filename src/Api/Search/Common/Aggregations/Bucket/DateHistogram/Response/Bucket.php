@@ -1,17 +1,19 @@
 <?php
 
-namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Bucket\Terms\Response;
+namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Bucket\DateHistogram\Response;
 
 use CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\AbstractResponse;
-use CodeSolo\Elasticsearch\Api\Search\Common\Response\Aggregations\HasAggregationsTrait;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Bucket extends AbstractResponse
 {
-    use HasAggregationsTrait;
+    /**
+     * @var string
+     */
+    private $keyAsString;
 
     /**
-     * @var int
+     * @var int|string
      */
     private $key;
 
@@ -23,7 +25,7 @@ class Bucket extends AbstractResponse
     /**
      * @inheritdoc
      */
-    public static function fromRawData(array $data): Bucket
+    public static function fromRawData(array $data)
     {
         if (!array_key_exists('key', $data) ||
             !array_key_exists('doc_count', $data)
@@ -31,9 +33,9 @@ class Bucket extends AbstractResponse
             throw new InvalidRawData();
         }
         $instance = new static();
+        $instance->keyAsString = $data['key_as_string'] ?? null;
         $instance->key = $data['key'];
         $instance->docCount = $data['doc_count'];
-        $instance->setAggregations($data);
         return $instance;
     }
 
@@ -42,16 +44,28 @@ class Bucket extends AbstractResponse
      */
     public function toRawData(): array
     {
-        $data = $this->getAggregations()->toRawData();
-        $data['key'] = $this->key;
-        $data['doc_count'] = $this->docCount;
+        $data = [
+            'key' => $this->key,
+            'doc_count' => $this->docCount,
+        ];
+        if (!is_null($this->keyAsString)) {
+            $data['key_as_string'] = $this->keyAsString;
+        }
         return $data;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getKey(): string
+    public function getKeyAsString()
+    {
+        return $this->keyAsString;
+    }
+
+    /**
+     * @return int|string
+     */
+    public function getKey()
     {
         return $this->key;
     }
@@ -59,7 +73,7 @@ class Bucket extends AbstractResponse
     /**
      * @return int
      */
-    public function getDocCount(): int
+    public function getDocCount()
     {
         return $this->docCount;
     }

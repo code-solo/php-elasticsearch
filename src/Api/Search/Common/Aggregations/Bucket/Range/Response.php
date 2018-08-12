@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Bucket\AdjacencyMatrix;
+namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Bucket\Range;
 
 use CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\AbstractResponse;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
@@ -15,14 +15,14 @@ class Response extends AbstractResponse
     /**
      * @inheritdoc
      */
-    public static function fromRawData(array $data): Response
+    public static function fromRawData(array $data)
     {
-        if (!array_key_exists('buckets', $data)) {
+        if (false) {
             throw new InvalidRawData();
         }
         $instance = new static();
-        foreach ($data['buckets'] as $bucket) {
-            $instance->buckets[] = Response\Bucket::fromRawData($bucket);
+        foreach ($data['buckets'] as $key => $bucket) {
+            $instance->buckets[$key] = Response\Bucket::fromRawData($bucket);
         }
         return $instance;
     }
@@ -32,11 +32,11 @@ class Response extends AbstractResponse
      */
     public function toRawData(): array
     {
-        return [
-            'buckets' => array_map(function(Response\Bucket $bucket) {
-                return $bucket->toRawData();
-            }, $this->buckets)
-        ];
+        $data = [];
+        foreach ($this->buckets as $key => $bucket) {
+            $data[$key] = $bucket->toRawData();
+        }
+        return $data;
     }
 
     /**

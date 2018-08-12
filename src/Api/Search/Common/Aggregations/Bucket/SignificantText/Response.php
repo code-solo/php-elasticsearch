@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Bucket\Terms;
+namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Bucket\SignificantText;
 
 use CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\AbstractResponse;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
@@ -10,12 +10,7 @@ class Response extends AbstractResponse
     /**
      * @var int
      */
-    private $docCountErrorUpperBound;
-
-    /**
-     * @var int
-     */
-    private $sumOtherDocCount;
+    private $docCount;
 
     /**
      * @var Response\Bucket[]
@@ -25,17 +20,16 @@ class Response extends AbstractResponse
     /**
      * @inheritdoc
      */
-    public static function fromRawData(array $data): Response
+    public static function fromRawData(array $data)
     {
-        if (!array_key_exists('doc_count_error_upper_bound', $data) ||
-            !array_key_exists('sum_other_doc_count', $data) ||
+        if (!array_key_exists('doc_count', $data) ||
             !array_key_exists('buckets', $data)
         ) {
             throw new InvalidRawData();
         }
         $instance = new static();
-        $instance->docCountErrorUpperBound = $data['doc_count_error_upper_bound'];
-        $instance->sumOtherDocCount = $data['sum_other_doc_count'];
+        $instance->docCount = $data['doc_count'];
+        $instance = new static();
         foreach ($data['buckets'] as $key => $bucket) {
             $instance->buckets[$key] = Response\Bucket::fromRawData($bucket);
         }
@@ -48,13 +42,20 @@ class Response extends AbstractResponse
     public function toRawData(): array
     {
         $data = [
-            'doc_count_error_upper_bound' => $this->docCountErrorUpperBound,
-            'sum_other_doc_count' => $this->sumOtherDocCount,
+            'doc_count' => $this->docCount,
         ];
         foreach ($this->buckets as $key => $bucket) {
             $data[$key] = $bucket->toRawData();
         }
         return $data;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDocCount(): int
+    {
+        return $this->docCount;
     }
 
     /**

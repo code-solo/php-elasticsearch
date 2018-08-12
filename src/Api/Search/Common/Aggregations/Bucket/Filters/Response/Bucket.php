@@ -1,33 +1,27 @@
 <?php
 
-namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Bucket\Children;
+namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Bucket\Filters\Response;
 
 use CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\AbstractResponse;
-use CodeSolo\Elasticsearch\Api\Search\Common\Response\Aggregations\HasAggregationsTrait;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
-class Response extends AbstractResponse
+class Bucket extends AbstractResponse
 {
-    use HasAggregationsTrait;
-
     /**
      * @var int
      */
     private $docCount;
 
     /**
-     * @param array $data
-     * @return Response|static
-     * @throws InvalidRawData
+     * @inheritdoc
      */
-    public static function fromRawData(array $data): Response
+    public static function fromRawData(array $data)
     {
         if (!array_key_exists('doc_count', $data)) {
             throw new InvalidRawData();
         }
         $instance = new static();
         $instance->docCount = $data['doc_count'];
-        $instance->setAggregations($data);
         return $instance;
     }
 
@@ -36,9 +30,9 @@ class Response extends AbstractResponse
      */
     public function toRawData(): array
     {
-        $data = $this->getAggregations()->toRawData();
-        $data['doc_count'] = $this->docCount;
-        return $data;
+        return [
+            'doc_count' => $this->docCount,
+        ];
     }
 
     /**
