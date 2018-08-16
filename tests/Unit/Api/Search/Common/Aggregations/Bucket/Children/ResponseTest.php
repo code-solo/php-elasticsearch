@@ -13,7 +13,9 @@ class ResponseTest extends AbstractTest
      */
     public function test1()
     {
-        $data = [];
+        $data = [
+            'doc_count' => 2,
+        ];
         $response = Response::fromRawData($data);
         $this->assertArraySame($data, $response->toRawData());
     }
