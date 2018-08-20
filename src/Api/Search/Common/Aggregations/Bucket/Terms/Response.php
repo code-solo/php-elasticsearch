@@ -47,14 +47,15 @@ class Response extends AbstractResponse
      */
     public function toRawData(): array
     {
-        $data = [
+        $buckets = [];
+        foreach ($this->buckets as $key => $bucket) {
+            $buckets[$key] = $bucket->toRawData();
+        }
+        return [
             'doc_count_error_upper_bound' => $this->docCountErrorUpperBound,
             'sum_other_doc_count' => $this->sumOtherDocCount,
+            'buckets' => $buckets,
         ];
-        foreach ($this->buckets as $key => $bucket) {
-            $data[$key] = $bucket->toRawData();
-        }
-        return $data;
     }
 
     /**

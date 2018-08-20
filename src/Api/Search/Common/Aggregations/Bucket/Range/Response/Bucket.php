@@ -3,10 +3,13 @@
 namespace CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\Bucket\Range\Response;
 
 use CodeSolo\Elasticsearch\Api\Search\Common\Aggregations\AbstractResponse;
+use CodeSolo\Elasticsearch\Api\Search\Common\Response\Aggregations\HasAggregationsTrait;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Bucket extends AbstractResponse
 {
+    use HasAggregationsTrait;
+
     /**
      * @var int|float|null
      */
@@ -48,9 +51,8 @@ class Bucket extends AbstractResponse
      */
     public function toRawData(): array
     {
-        $data = [
-            'doc_count' => $this->docCount,
-        ];
+        $data = $this->getAggregations()->toRawData();
+        $data['doc_count'] = $this->docCount;
         if (!is_null($this->from)) {
             $data['from'] = $this->from;
         }

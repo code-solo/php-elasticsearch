@@ -13,8 +13,22 @@ class ResponseTest extends AbstractTest
      */
     public function test1()
     {
-        return;
-        $data = [];
+        $data = [
+            'buckets' => [
+                [
+                    'key' => 'u17',
+                    'doc_count' => 3,
+                ],
+                [
+                    'key' => 'u09',
+                    'doc_count' => 2,
+                ],
+                [
+                    'key' => 'u15',
+                    'doc_count' => 1,
+                ],
+            ],
+        ];
         $response = Response::fromRawData($data);
         $this->assertArraySame($data, $response->toRawData());
     }

@@ -36,7 +36,6 @@ class Response extends AbstractResponse
         $instance = new static();
         $instance->docCount = $data['doc_count'];
         $instance->bgCount = $data['bg_count'];
-        $instance = new static();
         foreach ($data['buckets'] as $key => $bucket) {
             $instance->buckets[$key] = Response\Bucket::fromRawData($bucket);
         }
@@ -48,14 +47,15 @@ class Response extends AbstractResponse
      */
     public function toRawData(): array
     {
-        $data = [
+        $buckets = [];
+        foreach ($this->buckets as $key => $bucket) {
+            $buckets[$key] = $bucket->toRawData();
+        }
+        return [
             'doc_count' => $this->docCount,
             'bg_count' => $this->bgCount,
+            'buckets' => $buckets,
         ];
-        foreach ($this->buckets as $key => $bucket) {
-            $data[$key] = $bucket->toRawData();
-        }
-        return $data;
     }
 
     /**

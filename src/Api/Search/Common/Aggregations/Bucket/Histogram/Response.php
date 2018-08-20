@@ -32,11 +32,13 @@ class Response extends AbstractResponse
      */
     public function toRawData(): array
     {
-        $data = [];
+        $buckets = [];
         foreach ($this->buckets as $key => $bucket) {
-            $data[$key] = $bucket->toRawData();
+            $buckets[$key] = $bucket->toRawData();
         }
-        return $data;
+        return [
+            'buckets' => $buckets,
+        ];
     }
 
     /**
