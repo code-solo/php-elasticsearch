@@ -1,15 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: maximus
- * Date: 26.08.2018
- * Time: 20:56
- */
 
 namespace CodeSolo\Elasticsearch\Api;
 
+use CodeSolo\Elasticsearch\SingletonTrait;
 
 class ApiSearch
 {
-
+    use SingletonTrait;
 }

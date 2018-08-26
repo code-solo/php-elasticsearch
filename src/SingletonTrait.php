@@ -1,15 +1,26 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: maximus
- * Date: 26.08.2018
- * Time: 21:28
- */
 
 namespace CodeSolo\Elasticsearch;
 
-
-trait SingeltonTrait
+trait SingletonTrait
 {
+    /**
+     * @var static
+     */
+    protected static $instance;
 
+    /**
+     * @return static
+     */
+    public static function getInstance(): self
+    {
+        if (!static::$instance) {
+            static::$instance = new static();
+        }
+        return static::$instance;
+    }
+
+    protected function __construct()
+    {
+    }
 }
