@@ -25,7 +25,7 @@ class MGet extends AbstractRequest
     private $type;
 
     /**
-     * @var array
+     * @var MGet\Body
      */
     private $body;
 
@@ -56,7 +56,9 @@ class MGet extends AbstractRequest
     public function toDsl(): array
     {
         $dsl = parent::toDsl();
-        $dsl['body'] = $this->body;
+        if (!is_null($this->body)) {
+            $dsl['body'] = $this->body->toDsl();
+        }
         if (!is_null($this->index)) {
             $dsl['index'] = $this->index;
         }
@@ -87,10 +89,10 @@ class MGet extends AbstractRequest
     }
 
     /**
-     * @param array $body
+     * @param MGet\Body $body
      * @return static
      */
-    public function setBody(array $body): MGet
+    public function setBody(MGet\Body $body): MGet
     {
         $this->body = $body;
         return $this;

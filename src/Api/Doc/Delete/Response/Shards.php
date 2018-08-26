@@ -2,9 +2,10 @@
 
 namespace CodeSolo\Elasticsearch\Api\Doc\Delete\Response;
 
+use CodeSolo\Elasticsearch\Api\AbstractResponse;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
-class Shards
+class Shards extends AbstractResponse
 {
     /**
      * @var int
@@ -22,9 +23,7 @@ class Shards
     private $successful;
 
     /**
-     * @param array $data
-     * @return static
-     * @throws InvalidRawData
+     * @inheritdoc
      */
     public static function fromRawData(array $data): Shards
     {
@@ -42,10 +41,15 @@ class Shards
     }
 
     /**
-     * Shards constructor.
+     * @inheritdoc
      */
-    private function __construct()
+    public function toRawData(): array
     {
+        return [
+            'total' => $this->total,
+            'failed' => $this->failed,
+            'successful' => $this->successful,
+        ];
     }
 
     /**

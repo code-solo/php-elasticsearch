@@ -2,10 +2,11 @@
 
 namespace CodeSolo\Elasticsearch\Api\Doc\Update;
 
+use CodeSolo\Elasticsearch\Api\AbstractResponse;
 use CodeSolo\Elasticsearch\Api\Doc\Update\Response\Shards;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
-class Response
+class Response extends AbstractResponse
 {
     /**
      * @var Shards
@@ -31,16 +32,6 @@ class Response
      * @var int
      */
     private $version;
-
-    /**
-     * @var int|null
-     */
-    private $seqNo;
-
-    /**
-     * @var int|null
-     */
-    private $primaryTerm;
 
     /**
      * @var string
@@ -69,17 +60,23 @@ class Response
         $instance->type = $data['_type'];
         $instance->id = $data['_id'];
         $instance->version = $data['_version'];
-        $instance->seqNo = $data['_seq_no'] ?? null;
-        $instance->primaryTerm = $data['_primary_term'] ?? null;
         $instance->result = $data['result'];
         return $instance;
     }
 
     /**
-     * Response constructor.
+     * @inheritdoc
      */
-    private function __construct()
+    public function toRawData(): array
     {
+        return [
+            '_shards' => $this->shards->toRawData(),
+            '_index' => $this->index,
+            '_type' => $this->type,
+            '_id' => $this->id,
+            '_version' => $this->version,
+            'result' => $this->result,
+        ];
     }
 
     /**
@@ -120,22 +117,6 @@ class Response
     public function getVersion(): int
     {
         return $this->version;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getSeqNo()
-    {
-        return $this->seqNo;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getPrimaryTerm()
-    {
-        return $this->primaryTerm;
     }
 
     /**

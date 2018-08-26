@@ -2,10 +2,11 @@
 
 namespace CodeSolo\Elasticsearch\Api\MultiDoc\MGet;
 
+use CodeSolo\Elasticsearch\Api\AbstractResponse;
 use CodeSolo\Elasticsearch\Api\MultiDoc\MGet\Response\Doc;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
-class Response
+class Response extends AbstractResponse
 {
     /**
      * @var Doc[]
@@ -13,9 +14,7 @@ class Response
     private $docs;
 
     /**
-     * @param array $data
-     * @return static
-     * @throws InvalidRawData
+     * @inheritdoc
      */
     public static function fromRawData(array $data): Response
     {
@@ -30,10 +29,15 @@ class Response
     }
 
     /**
-     * Response constructor.
+     * @inheritdoc
      */
-    private function __construct()
+    public function toRawData(): array
     {
+        return [
+            'docs' => array_map(function (Response\Doc $doc) {
+                return $doc->toRawData();
+            }, $this->docs),
+        ];
     }
 
     /**

@@ -2,9 +2,10 @@
 
 namespace CodeSolo\Elasticsearch\Api\Doc\Get;
 
+use CodeSolo\Elasticsearch\Api\AbstractResponse;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
-class Response
+class Response extends AbstractResponse
 {
     /**
      * @var string
@@ -27,6 +28,11 @@ class Response
     private $version;
 
     /**
+     * @var string|null
+     */
+    private $routing;
+
+    /**
      * @var bool
      */
     private $found;
@@ -37,9 +43,12 @@ class Response
     private $source;
 
     /**
-     * @param array $data
-     * @return static
-     * @throws InvalidRawData
+     * @var array|null
+     */
+    private $fields;
+
+    /**
+     * @inheritdoc
      */
     public static function fromRawData(array $data): Response
     {
@@ -55,16 +64,37 @@ class Response
         $instance->type = $data['_type'];
         $instance->id = $data['_id'];
         $instance->version = $data['_version'] ?? null;
+        $instance->routing = $data['_routing'] ?? null;
         $instance->found = $data['found'];
         $instance->source = $data['_source'] ?? null;
+        $instance->fields = $data['fields'] ?? null;
         return $instance;
     }
 
     /**
-     * Response constructor.
+     * @inheritdoc
      */
-    private function __construct()
+    public function toRawData(): array
     {
+        $data =  [
+            '_index' => $this->index,
+            '_type' => $this->type,
+            '_id' => $this->id,
+            'found' => $this->found,
+        ];
+        if (!is_null($this->version)) {
+            $data['_version'] = $this->version;
+        }
+        if (!is_null($this->routing)) {
+            $data['_routing'] = $this->routing;
+        }
+        if (!is_null($this->source)) {
+            $data['_source'] = $this->source;
+        }
+        if (!is_null($this->fields)) {
+            $data['fields'] = $this->fields;
+        }
+        return $data;
     }
 
     /**
@@ -92,11 +122,19 @@ class Response
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getVersion(): ?int
     {
         return $this->version;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getRouting(): ?string
+    {
+        return $this->routing;
     }
 
     /**
@@ -108,10 +146,18 @@ class Response
     }
 
     /**
-     * @return array
+     * @return array|null
      */
     public function getSource(): ?array
     {
         return $this->source;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getFields(): ?array
+    {
+        return $this->fields;
     }
 }
