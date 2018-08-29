@@ -1,10 +1,12 @@
 <?php
 
-namespace CodeSolo\Elasticsearch\Connection;
+namespace CodeSolo\Elasticsearch\Client;
 
 use Elasticsearch\Client;
 
-interface ConnectionInterface
+interface ClientInterface
 {
-    public function getClient(): Client;
+    public function getName(): string;
+
+    public function getLowClient(): Client;
 }

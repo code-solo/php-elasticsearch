@@ -2,13 +2,11 @@
 
 namespace CodeSolo\Elasticsearch\Api;
 
-use CodeSolo\Elasticsearch\SingletonTrait;
+use CodeSolo\Elasticsearch\Client\ClientInterface;
 
 class ApiDoc
 {
-    use SingletonTrait;
-
-    public function create(): Doc\Create
+    public function create($client = null): Doc\Create
     {
 
     }

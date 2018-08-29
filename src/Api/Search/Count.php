@@ -4,15 +4,15 @@ namespace CodeSolo\Elasticsearch\Api\Search;
 
 use CodeSolo\Elasticsearch\Api\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\Search\Common\Request\Query;
-use CodeSolo\Elasticsearch\Connection\ConnectionInterface;
+use CodeSolo\Elasticsearch\Client\ClientInterface;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Count extends AbstractRequest
 {
     /**
-     * @var ConnectionInterface
+     * @var ClientInterface
      */
-    private $connection;
+    private $client;
 
     /**
      * @var string
@@ -31,11 +31,11 @@ class Count extends AbstractRequest
 
     /**
      * RequestBodySearch constructor.
-     * @param ConnectionInterface $connection
+     * @param ClientInterface $client
      */
-    public function __construct(ConnectionInterface $connection)
+    public function __construct(ClientInterface $client)
     {
-        $this->connection = $connection;
+        $this->client = $client;
         $this->body = new Count\Request();
     }
 
@@ -45,7 +45,7 @@ class Count extends AbstractRequest
      */
     public function do(): Count\Response
     {
-        $response = $this->connection->getClient()->count(
+        $response = $this->client->getLowClient()->count(
             $this->toDsl()
         );
         return Count\Response::fromRawData($response);

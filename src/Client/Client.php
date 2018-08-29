@@ -1,11 +1,11 @@
 <?php
 
-namespace CodeSolo\Elasticsearch\Connection;
+namespace CodeSolo\Elasticsearch\Client;
 
 use Elasticsearch\ClientBuilder;
-use Elasticsearch\Client;
+use Elasticsearch\Client as LowClient;
 
-class Connection implements ConnectionInterface
+class Client implements ClientInterface
 {
     /**
      * @var Client
@@ -23,9 +23,9 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * @return Client
+     * @return LowClient
      */
-    public function getClient(): Client
+    public function getLowClient(): LowClient
     {
         return $this->client;
     }

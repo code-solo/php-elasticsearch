@@ -4,15 +4,15 @@ namespace CodeSolo\Elasticsearch\Api\MultiDoc;
 
 use CodeSolo\Elasticsearch\Api\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\MultiDoc\UpdateByQuery\Response;
-use CodeSolo\Elasticsearch\Connection\ConnectionInterface;
+use CodeSolo\Elasticsearch\Client\ClientInterface;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class UpdateByQuery extends AbstractRequest
 {
     /**
-     * @var ConnectionInterface
+     * @var ClientInterface
      */
-    private $connection;
+    private $client;
 
     /**
      * @var string
@@ -31,11 +31,11 @@ class UpdateByQuery extends AbstractRequest
 
     /**
      * Index constructor.
-     * @param ConnectionInterface $connection
+     * @param ClientInterface $client
      */
-    public function __construct(ConnectionInterface $connection)
+    public function __construct(ClientInterface $client)
     {
-        $this->connection = $connection;
+        $this->client = $client;
     }
 
     /**
@@ -44,7 +44,7 @@ class UpdateByQuery extends AbstractRequest
      */
     public function do(): Response
     {
-        $response = $this->connection->getClient()->updateByQuery(
+        $response = $this->client->getLowClient()->updateByQuery(
             $this->toDsl()
         );
         return Response::fromRawData($response);

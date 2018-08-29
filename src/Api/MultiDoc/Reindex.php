@@ -3,14 +3,14 @@
 namespace CodeSolo\Elasticsearch\Api\MultiDoc;
 
 use CodeSolo\Elasticsearch\Api\AbstractRequest;
-use CodeSolo\Elasticsearch\Connection\ConnectionInterface;
+use CodeSolo\Elasticsearch\Client\ClientInterface;
 
 class Reindex extends AbstractRequest
 {
     /**
-     * @var ConnectionInterface
+     * @var ClientInterface
      */
-    private $connection;
+    private $client;
 
     /**
      * @var array
@@ -19,11 +19,11 @@ class Reindex extends AbstractRequest
 
     /**
      * Bulk constructor.
-     * @param ConnectionInterface $connection
+     * @param ClientInterface $client
      */
-    public function __construct(ConnectionInterface $connection)
+    public function __construct(ClientInterface $client)
     {
-        $this->connection = $connection;
+        $this->client = $client;
     }
 
     /**

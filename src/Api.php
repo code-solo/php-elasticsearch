@@ -2,10 +2,31 @@
 
 namespace CodeSolo\Elasticsearch;
 
-abstract class Api
+class Api
 {
-    public static function doc(): Api\ApiDoc
+    /**
+     * @var Api\ApiDoc
+     */
+    private $doc;
+
+    /**
+     * @var Api\ApiMultiDoc
+     */
+    private $multiDoc;
+
+    /**
+     * @var Api\ApiSearch
+     */
+    private $search;
+
+    /**
+     * @return Api\ApiDoc
+     */
+    public function doc(): Api\ApiDoc
     {
-        return Api\ApiDoc::getInstance();
+        if (!$this->doc) {
+            $this->doc = new Api\ApiDoc();
+        }
+        return $this->doc;
     }
 }

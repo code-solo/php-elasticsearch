@@ -2,7 +2,7 @@
 
 namespace CodeSolo\ElasticsearchTests\Unit\Api;
 
-use CodeSolo\Elasticsearch\Connection\Connection as Base;
+use CodeSolo\Elasticsearch\Client\Client as Base;
 
 class Connection extends Base
 {

@@ -5,15 +5,15 @@ namespace CodeSolo\Elasticsearch\Api\Search;
 use CodeSolo\Elasticsearch\Api\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\Search\Common\Request\Aggregations;
 use CodeSolo\Elasticsearch\Api\Search\Common\Request\Query;
-use CodeSolo\Elasticsearch\Connection\ConnectionInterface;
+use CodeSolo\Elasticsearch\Client\ClientInterface;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class RequestBodySearch extends AbstractRequest
 {
     /**
-     * @var ConnectionInterface
+     * @var ClientInterface
      */
-    private $connection;
+    private $client;
 
     /**
      * @var string
@@ -32,11 +32,11 @@ class RequestBodySearch extends AbstractRequest
 
     /**
      * RequestBodySearch constructor.
-     * @param ConnectionInterface $connection
+     * @param ClientInterface $client
      */
-    public function __construct(ConnectionInterface $connection)
+    public function __construct(ClientInterface $client)
     {
-        $this->connection = $connection;
+        $this->client = $client;
         $this->body = new RequestBodySearch\Request();
     }
 
@@ -46,7 +46,7 @@ class RequestBodySearch extends AbstractRequest
      */
     public function do(): RequestBodySearch\Response
     {
-        $response = $this->connection->getClient()->search(
+        $response = $this->client->getLowClient()->search(
             $this->toDsl()
         );
         return RequestBodySearch\Response::fromRawData($response);
