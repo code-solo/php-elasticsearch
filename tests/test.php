@@ -1,98 +1,16 @@
 <?php
 
-$arr = [
-    'query' => [
-        'filter' => [
-            'bool' => [
-                'match' => 10
-            ]
-        ]
-    ]
-];
+$client1 = new \CodeSolo\Elasticsearch\Client\Client('client1');
+$client2 = new \CodeSolo\Elasticsearch\Client\Client('client2');
 
-class Query
-{
-    public function setFilter(){}
+$api = new \CodeSolo\Elasticsearch\Api();
+$api
+    ->addClient($client1, true)
+    ->addClient($client2);
 
-    public function setFilterFunc(): Query{}
-}
+try {
+    $api->doc()->index();
 
-class Filter
-{
-    public function setBoool(){}
-}
-
-class Boool
-{
-    public function setMatch(){}
-}
-
-class Match
-{
+} catch (\CodeSolo\Elasticsearch\Exception\ClientNotFound $e) {
 
 }
-
-
-$query = new Query();
-$filter = new Filter();
-$boool = new Boool();
-$match = new Match();
-
-$filter->setBoool($boool);
-$query->setFilter($filter);
-
-
-$query->setFilterFunc(function ($boool) {
-})->setFilter();
-
-
-
-
-
-
-
-
-
-
-class Term
-{
-
-}
-
-class Clause
-{
-    /**
-     * @var array
-     */
-    private $sub = [];
-
-    /**
-     * @param Term $term
-     * @return Clause|static
-     */
-    public function setTerm(Term $term): Clause
-    {
-        $this->sub[] = $term;
-        return $this;
-    }
-
-    /**
-     * @param $class
-     * @param callable $func
-     * @return Clause
-     */
-    public function setWithFunc($class, callable $func): Clause
-    {
-        call_user_func(
-            $func,
-            $term = new $class()
-        );
-        return $this->setTerm($term);
-    }
-}
-
-$clause = new Clause();
-
-$clause->setWithFunc(Term::class, function (Term $clause) {
-
-});

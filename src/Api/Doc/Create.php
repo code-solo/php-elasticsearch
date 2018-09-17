@@ -5,7 +5,7 @@ namespace CodeSolo\Elasticsearch\Api\Doc;
 use CodeSolo\Elasticsearch\Api\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\Doc\Create\Response;
 use CodeSolo\Elasticsearch\Api\MultiDoc\Bulk\ToBulkDslInterface;
-use CodeSolo\Elasticsearch\Client\ClientInterface;
+use CodeSolo\Elasticsearch\ClientInterface;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Create extends AbstractRequest implements ToBulkDslInterface

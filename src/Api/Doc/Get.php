@@ -4,7 +4,7 @@ namespace CodeSolo\Elasticsearch\Api\Doc;
 
 use CodeSolo\Elasticsearch\Api\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\Doc\Get\Response;
-use CodeSolo\Elasticsearch\Client\ClientInterface;
+use CodeSolo\Elasticsearch\ClientInterface;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Get extends AbstractRequest

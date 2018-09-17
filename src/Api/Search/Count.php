@@ -4,7 +4,7 @@ namespace CodeSolo\Elasticsearch\Api\Search;
 
 use CodeSolo\Elasticsearch\Api\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\Search\Common\Request\Query;
-use CodeSolo\Elasticsearch\Client\ClientInterface;
+use CodeSolo\Elasticsearch\ClientInterface;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Count extends AbstractRequest

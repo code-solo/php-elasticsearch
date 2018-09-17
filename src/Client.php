@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeSolo\Elasticsearch\Client;
+namespace CodeSolo\Elasticsearch;
 
 use Elasticsearch\ClientBuilder;
 use Elasticsearch\Client as LowClient;
@@ -8,12 +8,21 @@ use Elasticsearch\Client as LowClient;
 class Client implements ClientInterface
 {
     /**
+     * @var string
+     */
+    private $name;
+
+    /**
      * @var Client
      */
     private $client;
 
-    public function __construct()
+    /**
+     * @inheritdoc
+     */
+    public function __construct(string $name)
     {
+        $this->name = $name;
         $this->client = ClientBuilder
             ::create()
             ->setHosts([
@@ -23,7 +32,15 @@ class Client implements ClientInterface
     }
 
     /**
-     * @return LowClient
+     * @inheritdoc
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @inheritdoc
      */
     public function getLowClient(): LowClient
     {

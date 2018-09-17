@@ -3,7 +3,7 @@
 namespace CodeSolo\Elasticsearch\Api\MultiDoc;
 
 use CodeSolo\Elasticsearch\Api\AbstractRequest;
-use CodeSolo\Elasticsearch\Client\ClientInterface;
+use CodeSolo\Elasticsearch\ClientInterface;
 
 class Reindex extends AbstractRequest
 {

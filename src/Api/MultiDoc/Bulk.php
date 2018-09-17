@@ -5,7 +5,7 @@ namespace CodeSolo\Elasticsearch\Api\MultiDoc;
 use CodeSolo\Elasticsearch\Api\AbstractRequest;
 use CodeSolo\Elasticsearch\Api\MultiDoc\Bulk\Response;
 use CodeSolo\Elasticsearch\Api\MultiDoc\Bulk\ToBulkDslInterface;
-use CodeSolo\Elasticsearch\Client\ClientInterface;
+use CodeSolo\Elasticsearch\ClientInterface;
 use CodeSolo\Elasticsearch\Exception\InvalidRawData;
 
 class Bulk extends AbstractRequest
